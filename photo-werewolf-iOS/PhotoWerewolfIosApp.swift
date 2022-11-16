@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct photo_werewolf_iOSApp: App {
+struct 	PhotoWerewolfIosApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
