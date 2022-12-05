@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
 	@State private var value1: String = ""
-    var body: some View {
+	@State var showingPopUp = false
+	var body: some View {
 		ZStack {
 			Color(red: 0.34, green: 0.4, blue: 0.49).ignoresSafeArea()
 			VStack {
@@ -30,7 +31,7 @@ struct HomeView: View {
 
 				TextField("# _ _ _ _", text: $value1)
 					.textFieldStyle(RoundedBorderTextFieldStyle())
-					.font(.system(size: 36))
+					.font(.system(size: 32))
 					.frame(width: 200.0)
 					.padding()
 					.multilineTextAlignment(.center)
@@ -41,7 +42,9 @@ struct HomeView: View {
 					.fontWeight(.black)
 
 				Button(action: {
-					print("tap buton")
+					withAnimation {
+						showingPopUp = true
+					}
 				}, label: {
 					Text("部屋をつくる")
 						.font(.system(size: 24, design: .rounded))
@@ -51,15 +54,65 @@ struct HomeView: View {
 				.padding()
 				.accentColor(Color.white)
 				.background(Color.orange)
-				.cornerRadius(26)
+				.cornerRadius(32)
 			}
 
+			if showingPopUp {
+				PopupView(isPresent: $showingPopUp)
+			}
+		}
+	}
+}
+
+struct PopupView: View {
+	@Binding var isPresent: Bool
+	@State private var value2: String = ""
+	var body: some View {
+		ZStack {
+			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
+				.ignoresSafeArea()
+			VStack {
+				Text("部屋名を入力してください")
+					.font(.system(size: 24, design: .rounded))
+					.foregroundColor(.white)
+					.fontWeight(.black)
+
+				TextField("例）写真人狼部屋", text: $value2)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+					.font(.system(size: 24))
+					.padding()
+
+				Button(action: {
+					print("aa")
+				}, label: {
+					Text("決定")
+						.font(.system(size: 24, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+				})
+				.padding()
+				.accentColor(Color.white)
+				.background(Color.orange)
+				.cornerRadius(26)
+
+				Button(action: {
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					Text("Close")
+				})
+			}
+			.frame(width: 280, alignment: .center)
+			.padding()
+			.background(Color.black)
+			.cornerRadius(36)
 		}
 	}
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
+	static var previews: some View {
+		HomeView()
+	}
 }
