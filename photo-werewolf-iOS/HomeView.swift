@@ -11,54 +11,57 @@ struct HomeView: View {
 	@State private var value1: String = ""
 	@State var showingPopUp = false
 	var body: some View {
-		ZStack {
-			Color(red: 0.34, green: 0.4, blue: 0.49).ignoresSafeArea()
-			VStack {
-				Text("写真人狼")
-					.font(.system(size: 64, design: .rounded))
-					.foregroundColor(.white)
-					.fontWeight(.black)
-
-				Image("character_hitsuji_ookami")
-					.resizable()
-					.scaledToFit()
-					.frame(width: 300, height: 150)
-
-				Text("コードを入力して部屋に入る")
-					.font(.system(size: 16, design: .rounded))
-					.foregroundColor(.white)
-					.fontWeight(.black)
-
-				TextField("# _ _ _ _", text: $value1)
-					.textFieldStyle(RoundedBorderTextFieldStyle())
-					.font(.system(size: 32))
-					.frame(width: 200.0)
-					.padding()
-					.multilineTextAlignment(.center)
-
-				Text("もしくは")
-					.font(.system(size: 16, design: .rounded))
-					.foregroundColor(.white)
-					.fontWeight(.black)
-
-				Button(action: {
-					withAnimation {
-						showingPopUp = true
-					}
-				}, label: {
-					Text("部屋をつくる")
-						.font(.system(size: 24, design: .rounded))
+		NavigationView {
+			ZStack {
+				Color(red: 0.133, green: 0.157, blue: 0.192)
+					.ignoresSafeArea()
+				VStack {
+					Text("写真人狼")
+						.font(.system(size: 64, design: .rounded))
 						.foregroundColor(.white)
 						.fontWeight(.black)
-				})
-				.padding()
-				.accentColor(Color.white)
-				.background(Color.orange)
-				.cornerRadius(32)
-			}
 
-			if showingPopUp {
-				PopupView(isPresent: $showingPopUp)
+					Image("character_hitsuji_ookami")
+						.resizable()
+						.scaledToFit()
+						.frame(width: 300, height: 150)
+
+					Text("コードを入力して部屋に入る")
+						.font(.system(size: 16, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+
+					TextField("# _ _ _ _ _", text: $value1)
+						.textFieldStyle(RoundedBorderTextFieldStyle())
+						.font(.system(size: 32))
+						.frame(width: 200.0)
+						.padding()
+						.multilineTextAlignment(.center)
+
+					Text("もしくは")
+						.font(.system(size: 16, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+
+					Button(action: {
+						withAnimation {
+							showingPopUp = true
+						}
+					}, label: {
+						Text("部屋をつくる")
+							.font(.system(size: 24, design: .rounded))
+							.foregroundColor(.white)
+							.fontWeight(.black)
+					})
+					.padding()
+					.accentColor(Color.white)
+					.background(Color.orange)
+					.cornerRadius(32)
+				}
+
+				if showingPopUp {
+					PopupView(isPresent: $showingPopUp)
+				}
 			}
 		}
 	}
@@ -82,18 +85,16 @@ struct PopupView: View {
 					.font(.system(size: 24))
 					.padding()
 
-				Button(action: {
-					print("aa")
-				}, label: {
-					Text("決定")
-						.font(.system(size: 24, design: .rounded))
-						.foregroundColor(.white)
-						.fontWeight(.black)
-				})
-				.padding()
-				.accentColor(Color.white)
-				.background(Color.orange)
-				.cornerRadius(26)
+					NavigationLink(destination: WaitingRoomView()) {
+						Text("決定")
+							.font(.system(size: 24, design: .rounded))
+							.foregroundColor(.white)
+							.fontWeight(.black)
+					}
+					.padding()
+					.accentColor(Color.white)
+					.background(Color.orange)
+					.cornerRadius(26)
 
 				Button(action: {
 					withAnimation {
@@ -105,7 +106,7 @@ struct PopupView: View {
 			}
 			.frame(width: 280, alignment: .center)
 			.padding()
-			.background(Color.black)
+			.background(Color(red: 0.133, green: 0.157, blue: 0.192))
 			.cornerRadius(36)
 		}
 	}
