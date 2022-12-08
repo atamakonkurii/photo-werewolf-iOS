@@ -11,8 +11,7 @@ struct WaitingRoomView: View {
 	let roomNumber: String = "50500"
 	@Environment(\.dismiss) var dismiss
 
-    var body: some View {
-
+	var body: some View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
 				.ignoresSafeArea()
@@ -161,14 +160,12 @@ struct WaitingRoomView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
-						Button(action: {
-							print("aa")
-						}, label: {
+						NavigationLink(destination: PhotoSelectView()) {
 							Text("スタート")
 								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
-						})
+						}
 						.padding()
 						.accentColor(Color.white)
 						.background(Color.orange)
@@ -181,7 +178,7 @@ struct WaitingRoomView: View {
 				Spacer(minLength: 50)
 			}
 		}
-    }
+	}
 
 	func sharePost(shareText: String, shareUrl: String) {
 		let activityItems = [shareText, URL(string: shareUrl)!] as [Any]
@@ -192,7 +189,7 @@ struct WaitingRoomView: View {
 }
 
 struct WaitingRoomView_Previews: PreviewProvider {
-    static var previews: some View {
-        WaitingRoomView()
-    }
+	static var previews: some View {
+		WaitingRoomView()
+	}
 }
