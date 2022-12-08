@@ -13,6 +13,7 @@
 		D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD7E55292530C600BBA817 /* HomeView.swift */; };
 		D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */; };
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
+		D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D5AD7E5A292535DC00BBA817 /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = text; path = BuildTools; sourceTree = SOURCE_ROOT; };
 		D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
+		D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationRollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				D5AD7E5A292535DC00BBA817 /* BuildTools */,
 				D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */,
 				D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */,
+				D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */,
 				D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */,
 				D5AD7E55292530C600BBA817 /* HomeView.swift */,
 				D5914FFA2922E8D2007E61D5 /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
 				D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */,
+				D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  PhotoSelectView.swift
+//  ConfirmationRollView.swift
 //  photo-werewolf-iOS
 //
 //  Created by 太田和希 on 2022/12/08.
@@ -7,43 +7,35 @@
 
 import SwiftUI
 
-struct PhotoSelectView: View {
-	@State var image: UIImage?
-	@State var showingAlert: Bool = false
-
-	var body: some View {
+struct ConfirmationRollView: View {
+	@State var showingPopUp = false
+    var body: some View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
 				.ignoresSafeArea()
 				.navigationBarBackButtonHidden(true)
 
 			VStack {
-				Text("写真選択")
+				Text("役職確認")
 					.font(.system(size: 40, design: .rounded))
 					.foregroundColor(.white)
 					.fontWeight(.black)
 					.padding(.bottom, 16)
 
-				Text("自分が語りたい写真を選択してください")
-					.font(.system(size: 14, design: .rounded))
-					.foregroundColor(.white)
-					.fontWeight(.black)
-
-				Button {
-					showingAlert = true
-				} label: {
-					if let image = image {
-						Image(uiImage: image)
-							.resizable()
-							.frame(width: 200, height: 200)
-					} else {
-						Image(systemName: "photo")
-							.font(.system(size: 32, design: .rounded))
-							.foregroundColor(Color.white)
-							.frame(width: 200, height: 200)
-							.background(Color(UIColor.lightGray))
+				Button(action: {
+					withAnimation {
+						showingPopUp = true
 					}
-				}
+				}, label: {
+					Text("確認する")
+						.font(.system(size: 24, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+				})
+				.padding()
+				.accentColor(Color.white)
+				.background(Color.purple)
+				.cornerRadius(32)
 				.padding(.bottom, 16)
 
 				ZStack {
@@ -122,8 +114,8 @@ struct PhotoSelectView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
-						NavigationLink(destination: ConfirmationRollView()) {
-							Text("役職確認へ")
+						NavigationLink(destination: PhotoSelectView()) {
+							Text("話し合いへ")
 								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
@@ -137,61 +129,52 @@ struct PhotoSelectView: View {
 				}
 			}
 			.frame(width: 300)
-			.sheet(isPresented: $showingAlert) {
-			} content: {
-				ImagePicker(image: $image)
+
+			if showingPopUp {
+				ConfirmationRoolPopupView(isPresent: $showingPopUp)
 			}
+		}
+    }
+}
+
+struct ConfirmationRoolPopupView: View {
+	@Binding var isPresent: Bool
+	var body: some View {
+		ZStack {
+			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
+				.ignoresSafeArea()
+			VStack {
+				Text("あなたは「人狼」です。\n他の人狼と写真が入れ替わります")
+					.font(.system(size: 24, design: .rounded))
+					.foregroundColor(.white)
+					.fontWeight(.black)
+
+				Button(action: {
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					Text("閉じる")
+						.font(.system(size: 24, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+				})
+				.padding()
+				.accentColor(Color.white)
+				.background(Color.purple)
+				.cornerRadius(32)
+				.padding(.bottom, 16)
+			}
+			.frame(width: 280, alignment: .center)
+			.padding()
+			.background(Color(red: 0.133, green: 0.157, blue: 0.192))
+			.cornerRadius(36)
 		}
 	}
 }
 
-struct PhotoSelectView_Previews: PreviewProvider {
-	static var previews: some View {
-		PhotoSelectView()
-	}
-}
-
-import PhotosUI
-
-struct ImagePicker: UIViewControllerRepresentable {
-	@Environment(\.presentationMode) var presentationMode
-	@Binding var image: UIImage?
-
-	func makeCoordinator() -> Coordinator {
-		Coordinator(self)
-	}
-
-	func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
-		var configuration = PHPickerConfiguration()
-		configuration.filter = .images
-		configuration.selectionLimit = 1
-		let picker = PHPickerViewController(configuration: configuration)
-		picker.delegate = context.coordinator
-		return picker
-	}
-
-	func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePicker>) {}
-
-	class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-		let parent: ImagePicker
-
-		init(_ parent: ImagePicker) {
-			self.parent = parent
-		}
-
-		func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-			parent.presentationMode.wrappedValue.dismiss()
-
-			if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-				itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
-					guard let image = image as? UIImage else {
-						return
-					}
-					DispatchQueue.main.sync {
-						self?.parent.image = image
-					}
-				}
-			}
-		}
-	}
+struct ConfirmationRollView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmationRollView()
+    }
 }
