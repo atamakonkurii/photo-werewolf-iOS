@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5024499294767D1005B3282 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5024498294767D1005B3282 /* GoogleService-Info.plist */; };
+		D502449C29476903005B3282 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D502449B29476903005B3282 /* FirebaseAnalytics */; };
+		D502449E29476903005B3282 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D502449D29476903005B3282 /* FirebaseAuth */; };
+		D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D502449F29476903005B3282 /* FirebaseCrashlytics */; };
+		D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D50244A129476903005B3282 /* FirebaseFirestore */; };
 		D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */; };
 		D5914FFB2922E8D2007E61D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFA2922E8D2007E61D5 /* Assets.xcassets */; };
 		D5914FFE2922E8D2007E61D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFD2922E8D2007E61D5 /* Preview Assets.xcassets */; };
@@ -17,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D5024498294767D1005B3282 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "photo-werewolf-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWerewolfIosApp.swift; sourceTree = "<group>"; };
 		D5914FFA2922E8D2007E61D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,6 +39,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */,
+				D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */,
+				D502449C29476903005B3282 /* FirebaseAnalytics in Frameworks */,
+				D502449E29476903005B3282 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +75,7 @@
 				D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */,
 				D5AD7E55292530C600BBA817 /* HomeView.swift */,
 				D5914FFA2922E8D2007E61D5 /* Assets.xcassets */,
+				D5024498294767D1005B3282 /* GoogleService-Info.plist */,
 				D5914FFC2922E8D2007E61D5 /* Preview Content */,
 			);
 			path = "photo-werewolf-iOS";
@@ -95,6 +106,12 @@
 			dependencies = (
 			);
 			name = "photo-werewolf-iOS";
+			packageProductDependencies = (
+				D502449B29476903005B3282 /* FirebaseAnalytics */,
+				D502449D29476903005B3282 /* FirebaseAuth */,
+				D502449F29476903005B3282 /* FirebaseCrashlytics */,
+				D50244A129476903005B3282 /* FirebaseFirestore */,
+			);
 			productName = "photo-werewolf-iOS";
 			productReference = D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -123,6 +140,9 @@
 				Base,
 			);
 			mainGroup = D5914FEA2922E8CE007E61D5;
+			packageReferences = (
+				D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = D5914FF42922E8CE007E61D5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,6 +159,7 @@
 			files = (
 				D5914FFE2922E8D2007E61D5 /* Preview Assets.xcassets in Resources */,
 				D5914FFB2922E8D2007E61D5 /* Assets.xcassets in Resources */,
+				D5024499294767D1005B3282 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +395,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D502449B29476903005B3282 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D502449D29476903005B3282 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D502449F29476903005B3282 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		D50244A129476903005B3282 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D5914FEB2922E8CE007E61D5 /* Project object */;
 }
