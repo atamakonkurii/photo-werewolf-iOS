@@ -78,11 +78,13 @@ struct PopupView: View {
 			VStack {
 				Button(action: {
 					Auth.auth().signInAnonymously { authResult, error in
-						guard error != nil else {
+						guard error == nil else {
+							print("エラー\(String(describing: error))")
 							return
 						}
 						print(authResult!)
 					}
+
 					withAnimation {
 						isPresent = false
 					}
