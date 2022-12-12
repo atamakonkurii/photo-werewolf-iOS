@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct HomeView: View {
 	@State private var value1: String = ""
@@ -75,6 +76,28 @@ struct PopupView: View {
 			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
 				.ignoresSafeArea()
 			VStack {
+				Button(action: {
+					Auth.auth().signInAnonymously { authResult, error in
+						guard error == nil else {
+							print("エラー\(String(describing: error))")
+							return
+						}
+						print(authResult!)
+					}
+
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					HStack {
+						Spacer()
+
+						Image(systemName: "multiply.circle.fill")
+							.font(.system(size: 30))
+							.foregroundColor(.gray)
+					}
+				})
+
 				Text("部屋名を入力してください")
 					.font(.system(size: 24, design: .rounded))
 					.foregroundColor(.white)
@@ -95,14 +118,6 @@ struct PopupView: View {
 					.accentColor(Color.white)
 					.background(Color.orange)
 					.cornerRadius(26)
-
-				Button(action: {
-					withAnimation {
-						isPresent = false
-					}
-				}, label: {
-					Text("Close")
-				})
 			}
 			.frame(width: 280, alignment: .center)
 			.padding()
