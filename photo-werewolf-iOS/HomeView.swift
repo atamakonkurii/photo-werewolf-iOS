@@ -11,12 +11,23 @@ import FirebaseAuth
 struct HomeView: View {
 	@State private var value1: String = ""
 	@State var showingPopUp = false
+
 	var body: some View {
 		NavigationView {
 			ZStack {
 				Color(red: 0.133, green: 0.157, blue: 0.192)
 					.ignoresSafeArea()
 				VStack {
+					HStack(alignment: .top) {
+						Spacer()
+
+						Text("\(Auth.auth().currentUser?.displayName ?? "ななし")")
+							.font(.system(size: 16, design: .rounded))
+							.foregroundColor(.white)
+							.fontWeight(.medium)
+							.padding(.trailing, 32)
+					}
+
 					Text("写真人狼")
 						.font(.system(size: 64, design: .rounded))
 						.foregroundColor(.white)
@@ -64,8 +75,38 @@ struct HomeView: View {
 					PopupView(isPresent: $showingPopUp)
 				}
 			}
+		}.onAppear {
+			// ログインしていない場合は匿名ログインをする
+			anonymousLogin()
+
+			// 名前の設定
+			setDisplayName(name: "太田")
 		}
 	}
+
+	private func anonymousLogin() {
+		if Auth.auth().currentUser == nil {
+			Auth.auth().signInAnonymously { authResult, error in
+				guard let user = authResult?.user else {
+					return
+				}
+				print(user.uid)
+			}
+		}
+	}
+
+	private func setDisplayName(name: String) {
+		if let user = Auth.auth().currentUser {
+			let request = user.createProfileChangeRequest()
+			request.displayName = name
+			request.commitChanges { error in
+				if error == nil {
+					print("名前を設定しました")
+				}
+			}
+		}
+	}
+
 }
 
 struct PopupView: View {
@@ -77,14 +118,6 @@ struct PopupView: View {
 				.ignoresSafeArea()
 			VStack {
 				Button(action: {
-					Auth.auth().signInAnonymously { authResult, error in
-						guard error == nil else {
-							print("エラー\(String(describing: error))")
-							return
-						}
-						print(authResult!)
-					}
-
 					withAnimation {
 						isPresent = false
 					}
