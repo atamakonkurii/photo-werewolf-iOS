@@ -10,7 +10,8 @@ import FirebaseAuth
 
 struct HomeView: View {
 	@State private var value1: String = ""
-	@State var showingPopUp = false
+	@State var showingMakeRoomPopUp = false
+	@State var showingNameChangePopUp = false
 
 	var body: some View {
 		NavigationView {
@@ -21,12 +22,25 @@ struct HomeView: View {
 					HStack(alignment: .top) {
 						Spacer()
 
-						Text("\(Auth.auth().currentUser?.displayName ?? "ななし")")
-							.font(.system(size: 16, design: .rounded))
+						Image(systemName: "person.fill")
+							.font(.system(size: 24))
 							.foregroundColor(.white)
-							.fontWeight(.medium)
-							.padding(.trailing, 32)
+
+						Button(action: {
+							withAnimation {
+								showingNameChangePopUp = true
+							}
+						}, label: {
+							Text("\(Auth.auth().currentUser?.displayName ?? "ななし")")
+								.font(.system(size: 24, design: .rounded))
+								.foregroundColor(.white)
+								.fontWeight(.medium)
+								.padding(.trailing, 32)
+						})
 					}
+					.padding(.top, 32)
+
+					Spacer()
 
 					Text("写真人狼")
 						.font(.system(size: 64, design: .rounded))
@@ -57,7 +71,7 @@ struct HomeView: View {
 
 					Button(action: {
 						withAnimation {
-							showingPopUp = true
+							showingMakeRoomPopUp = true
 						}
 					}, label: {
 						Text("部屋をつくる")
@@ -69,18 +83,21 @@ struct HomeView: View {
 					.accentColor(Color.white)
 					.background(Color.orange)
 					.cornerRadius(32)
+
+					Spacer()
 				}
 
-				if showingPopUp {
-					PopupView(isPresent: $showingPopUp)
+				if showingNameChangePopUp {
+					NameChangePopupView(isPresent: $showingNameChangePopUp)
+				}
+
+				if showingMakeRoomPopUp {
+					MakeRoomPopupView(isPresent: $showingMakeRoomPopUp)
 				}
 			}
 		}.onAppear {
 			// ログインしていない場合は匿名ログインをする
 			anonymousLogin()
-
-			// 名前の設定
-			setDisplayName(name: "太田")
 		}
 	}
 
@@ -92,6 +109,63 @@ struct HomeView: View {
 				}
 				print(user.uid)
 			}
+		}
+	}
+}
+
+struct NameChangePopupView: View {
+	@Binding var isPresent: Bool
+	@State private var setName: String = ""
+	var body: some View {
+		ZStack {
+			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
+				.ignoresSafeArea()
+			VStack {
+				Button(action: {
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					HStack {
+						Spacer()
+
+						Image(systemName: "multiply.circle.fill")
+							.font(.system(size: 30))
+							.foregroundColor(.gray)
+					}
+				})
+
+				Text("名前の変更")
+					.font(.system(size: 24, design: .rounded))
+					.foregroundColor(.white)
+					.fontWeight(.black)
+
+				TextField("例）かずお", text: $setName)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+					.font(.system(size: 24))
+					.padding()
+
+				Button(action: {
+					setDisplayName(name: setName)
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					Text("変更する")
+						.font(.system(size: 24, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+				})
+				.padding()
+				.accentColor(Color.white)
+				.background(Color.orange)
+				.cornerRadius(26)
+
+			}
+			.frame(width: 280, alignment: .center)
+			.padding()
+			.background(Color(red: 0.133, green: 0.157, blue: 0.192))
+			.cornerRadius(36)
 		}
 	}
 
@@ -106,10 +180,9 @@ struct HomeView: View {
 			}
 		}
 	}
-
 }
 
-struct PopupView: View {
+struct MakeRoomPopupView: View {
 	@Binding var isPresent: Bool
 	@State private var value2: String = ""
 	var body: some View {
