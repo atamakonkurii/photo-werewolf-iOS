@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct HomeView: View {
 	@State private var value1: String = ""
@@ -102,12 +103,22 @@ struct HomeView: View {
 	}
 
 	private func anonymousLogin() {
+		// 未ログインの場合、必ず匿名ログインをする
 		if Auth.auth().currentUser == nil {
-			Auth.auth().signInAnonymously { authResult, error in
-				guard let user = authResult?.user else {
-					return
-				}
-				print(user.uid)
+			Auth.auth().signInAnonymously { _, error in
+				if error != nil { return }
+			}
+		}
+		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
+		let docRef = Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid)
+
+		docRef.getDocument { (document, _ ) in
+			if let document = document, document.exists {
+				let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+				print("Document data: \(dataDescription)")
+			} else {
+				print("Document does not exist")
+				docRef.setData(["name": "名無し"])
 			}
 		}
 	}
