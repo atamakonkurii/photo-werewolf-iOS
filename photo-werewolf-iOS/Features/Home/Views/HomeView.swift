@@ -93,7 +93,7 @@ struct HomeView: View {
 				}
 
 				if viewModel.showingMakeRoomPopUp {
-					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp)
+					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp, viewModel:  MakeRoomViewModel(model: MakeRoomModel()))
 				}
 			}
 		}.onAppear {

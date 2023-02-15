@@ -17,7 +17,11 @@ struct FirebaseAuthBase {
 			}
 		}
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
-		let docRef = Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid)
+		 guard let currentUser = Auth.auth().currentUser else {
+			 return
+		 }
+
+		 let docRef = Firestore.firestore().collection("users").document(currentUser.uid)
 
 		docRef.getDocument { (document, _ ) in
 			if let document = document, document.exists {

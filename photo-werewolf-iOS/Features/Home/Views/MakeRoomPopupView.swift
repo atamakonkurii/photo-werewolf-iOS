@@ -10,6 +10,8 @@ import SwiftUI
 struct MakeRoomPopupView: View {
 	@Binding var isPresent: Bool
 	@State private var value2: String = ""
+	@StateObject var viewModel: MakeRoomViewModel
+
 	var body: some View {
 		ZStack {
 			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
@@ -39,7 +41,11 @@ struct MakeRoomPopupView: View {
 					.font(.system(size: 24))
 					.padding()
 
-				NavigationLink(destination: WaitingRoomView()) {
+				Button {
+					withAnimation {
+						viewModel.navigationWaitingRoom()
+					}
+				} label: {
 					Text("決定")
 						.font(.system(size: 24, design: .rounded))
 						.foregroundColor(.white)
@@ -49,6 +55,10 @@ struct MakeRoomPopupView: View {
 				.accentColor(Color.white)
 				.background(Color.orange)
 				.cornerRadius(26)
+
+				NavigationLink(destination: WaitingRoomView(), isActive: $viewModel.isActiveWaitingRoomView) {
+					EmptyView()
+				}
 			}
 			.frame(width: 280, alignment: .center)
 			.padding()

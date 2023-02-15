@@ -12,6 +12,8 @@
 		D502449E29476903005B3282 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D502449D29476903005B3282 /* FirebaseAuth */; };
 		D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D502449F29476903005B3282 /* FirebaseCrashlytics */; };
 		D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D50244A129476903005B3282 /* FirebaseFirestore */; };
+		D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */; };
+		D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */; };
 		D57B3D58298957BF009E00A9 /* FIrebaseAuthBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */; };
 		D57B3D5A29895982009E00A9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5929895982009E00A9 /* HomeViewModel.swift */; };
 		D57B3D5C29895C96009E00A9 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5B29895C96009E00A9 /* HomeModel.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		D5024498294767D1005B3282 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MakeRoomPopupViewModel.swift; path = "photo-werewolf-iOS/Features/StandardGame/ViewModels/MakeRoomPopupViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomModel.swift; sourceTree = "<group>"; };
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthBase.swift; sourceTree = "<group>"; };
 		D57B3D5929895982009E00A9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Auth/FirebaseAuth/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D57B3D5B29895C96009E00A9 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeModel.swift; path = "photo-werewolf-iOS/Auth/FirebaseAuth/HomeModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D57B3D5929895982009E00A9 /* HomeViewModel.swift */,
+				D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 		D57B3D52298954AB009E00A9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */,
 				D57B3D5B29895C96009E00A9 /* HomeModel.swift */,
 			);
 			path = Models;
@@ -321,7 +327,9 @@
 				D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */,
 				D57B3D58298957BF009E00A9 /* FIrebaseAuthBase.swift in Sources */,
 				D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */,
+				D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */,
 				D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */,
+				D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */,
 				D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
