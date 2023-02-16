@@ -93,7 +93,7 @@ struct HomeView: View {
 				}
 
 				if viewModel.showingMakeRoomPopUp {
-					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp, viewModel:  MakeRoomViewModel(model: MakeRoomModel()))
+					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp, viewModel: MakeRoomViewModel(model: MakeRoomModel()))
 				}
 			}
 		}.onAppear {
@@ -103,8 +103,8 @@ struct HomeView: View {
 	}
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		HomeView()
-//	}
-//}
+struct HomeView_Previews: PreviewProvider {
+	static var previews: some View {
+		HomeView(viewModel: HomeViewModel(model: HomeModel()))
+	}
+}
