@@ -9,19 +9,22 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct FirebaseAuthBase {
-	 func anonymousLogin() {
+
+	let currentUser = Auth.auth().currentUser
+
+	func anonymousLogin() {
 		// 未ログインの場合、必ず匿名ログインをする
-		if Auth.auth().currentUser == nil {
+		if currentUser == nil {
 			Auth.auth().signInAnonymously { _, error in
 				if error != nil { return }
 			}
 		}
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
-		 guard let currentUser = Auth.auth().currentUser else {
+		 guard let user = currentUser else {
 			 return
 		 }
 
-		 let docRef = Firestore.firestore().collection("users").document(currentUser.uid)
+		 let docRef = Firestore.firestore().collection("users").document(user.uid)
 
 		docRef.getDocument { (document, _ ) in
 			if let document = document, document.exists {
@@ -35,7 +38,7 @@ struct FirebaseAuthBase {
 	}
 
 	func setDisplayName(name: String) {
-		if let user = Auth.auth().currentUser {
+		if let user = currentUser {
 			let request = user.createProfileChangeRequest()
 			request.displayName = name
 			request.commitChanges { error in

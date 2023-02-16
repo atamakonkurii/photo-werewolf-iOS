@@ -72,6 +72,7 @@ struct HomeView: View {
 
 					Button(action: {
 						withAnimation {
+							FirestoreMakeRoom().makeRoom()
 							viewModel.showingMakeRoomPopUp = true
 						}
 					}, label: {
