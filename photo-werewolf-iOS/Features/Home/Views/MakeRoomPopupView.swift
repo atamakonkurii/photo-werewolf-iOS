@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MakeRoomPopupView: View {
 	@Binding var isPresent: Bool
-	@State private var value2: String = ""
+	@State private var roomName: String = ""
 	@StateObject var viewModel: MakeRoomViewModel
 
 	var body: some View {
@@ -36,13 +36,14 @@ struct MakeRoomPopupView: View {
 					.foregroundColor(.white)
 					.fontWeight(.black)
 
-				TextField("例）写真人狼部屋", text: $value2)
+				TextField("例）写真人狼部屋", text: $roomName)
 					.textFieldStyle(RoundedBorderTextFieldStyle())
 					.font(.system(size: 24))
 					.padding()
 
 				Button {
 					withAnimation {
+						FirestoreMakeRoom().makeRoom(roomName: roomName, gameType: GameType.standard.rawValue)
 						viewModel.navigationWaitingRoom()
 					}
 				} label: {

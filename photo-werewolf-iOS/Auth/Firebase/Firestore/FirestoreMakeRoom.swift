@@ -10,14 +10,23 @@ import FirebaseFirestore
 struct FirestoreMakeRoom {
 	let firestoreBase = Firestore.firestore()
 
-	func makeRoom() {
+	func makeRoom(roomName: String, gameType: String) {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
 		guard let user = FirebaseAuthBase().currentUser else {
 			return
 		}
 
-		let docRef = firestoreBase.collection("rooms").document(user.uid)
-		docRef.setData(["test": "テスト"])
+		// 部屋番号をランダム生成する
+		let number = "0123456789"
+		let randomNumber = String((0..<6).map { _ in number.randomElement()!})
+
+		// roomドキュメントの作成
+		let docRef = firestoreBase.collection("rooms").document(randomNumber)
+		docRef.setData(["ownerId": "\(user.uid)",
+						"ownerName": "\(String(describing: user.displayName ?? ""))",
+						"roomName": "\(roomName)",
+						"status": "\(RoomStatus.waiting.rawValue)",
+						"gameType": "\(gameType)"])
 	}
 
 }

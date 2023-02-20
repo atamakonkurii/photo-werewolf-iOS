@@ -24,6 +24,7 @@
 		D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */; };
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
 		D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */; };
+		D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */; };
 		D5D4E5D3299EEFB300F9B1EE /* FirestoreMakeRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D2299EEFB300F9B1EE /* FirestoreMakeRoom.swift */; };
 		D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */; };
 		D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */; };
@@ -46,6 +47,7 @@
 		D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
 		D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationRollView.swift; sourceTree = "<group>"; };
+		D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEnum.swift; sourceTree = "<group>"; };
 		D5D4E5D2299EEFB300F9B1EE /* FirestoreMakeRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMakeRoom.swift; sourceTree = "<group>"; };
 		D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Features/Home/Models/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -200,6 +202,7 @@
 		D5914FF52922E8CE007E61D5 /* photo-werewolf-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D5D43DE929A4288F005C5C10 /* Utils */,
 				D57B3D55298956D5009E00A9 /* Auth */,
 				D57B3D5329895671009E00A9 /* Data */,
 				D57B3D4629895414009E00A9 /* Features */,
@@ -218,6 +221,22 @@
 				D5914FFD2922E8D2007E61D5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D5D43DE929A4288F005C5C10 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D5D43DEA29A4289D005C5C10 /* Enum */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D5D43DEA29A4289D005C5C10 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		D5D4E5D0299EED7F00F9B1EE /* FIrebaseAutentication */ = {
@@ -345,6 +364,7 @@
 				D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */,
 				D57B3D58298957BF009E00A9 /* FIrebaseAuthBase.swift in Sources */,
 				D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */,
+				D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */,
 				D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */,
 				D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */,
 				D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */,
