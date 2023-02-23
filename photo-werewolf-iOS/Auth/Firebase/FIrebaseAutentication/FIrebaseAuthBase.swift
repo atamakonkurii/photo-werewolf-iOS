@@ -35,15 +35,28 @@ final public class FirebaseAuthBase {
 		}
 		let docRef = Firestore.firestore().collection("users").document(user.uid)
 
-		docRef.getDocument { (document, _ ) in
-			if let document = document, document.exists {
-				let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-				print("Document data: \(dataDescription)")
-			} else {
-				print("Document does not exist")
-				docRef.setData(["name": "名無し"])
+		docRef.getDocument(as: FirestoreUser.self) { result in
+			switch result {
+			case .success(let firestoreUser):
+				self.firestoreUser = firestoreUser
+			case .failure(let error):
+				switch error {
+				case DecodingError.valueNotFound(_, _):
+					print("ユーザーが存在しないので新規作成")
+					self.firestoreUser = FirestoreUser(name: "名無し")
+					do {
+						try docRef.setData(from: self.firestoreUser)
+					}
+					catch {
+						print(error)
+					}
+				default:
+					print("error:\(error)")
+				}
 			}
 		}
+
+
 	}
 
 	func setDisplayName(name: String) {
