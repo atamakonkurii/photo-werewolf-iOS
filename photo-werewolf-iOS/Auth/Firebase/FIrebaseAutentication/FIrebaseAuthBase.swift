@@ -7,10 +7,15 @@
 
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-struct FirebaseAuthBase {
+final public class FirebaseAuthBase {
+	public static let shared = FirebaseAuthBase()
+	var firestoreUser: FirestoreUser?
 
 	let currentUser = Auth.auth().currentUser
+
+	private init() {}
 
 	func anonymousLogin() {
 		// 未ログインの場合、必ず匿名ログインをする
@@ -19,12 +24,16 @@ struct FirebaseAuthBase {
 				if error != nil { return }
 			}
 		}
-		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
-		 guard let user = currentUser else {
-			 return
-		 }
 
-		 let docRef = Firestore.firestore().collection("users").document(user.uid)
+		setFirestoreUser()
+	}
+
+	func setFirestoreUser() {
+		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
+		guard let user = currentUser else {
+			return
+		}
+		let docRef = Firestore.firestore().collection("users").document(user.uid)
 
 		docRef.getDocument { (document, _ ) in
 			if let document = document, document.exists {
@@ -48,4 +57,10 @@ struct FirebaseAuthBase {
 			}
 		}
 	}
+}
+
+// firestoreのユーザーデータを格納する構造体
+struct FirestoreUser: Codable {
+	@DocumentID var id: String?
+	var name: String
 }

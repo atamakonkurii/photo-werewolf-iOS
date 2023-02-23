@@ -98,7 +98,7 @@ struct HomeView: View {
 			}
 		}.onAppear {
 			// ログインしていない場合は匿名ログインをする
-			FirebaseAuthBase().anonymousLogin()
+			FirebaseAuthBase.shared.anonymousLogin()
 		}
 	}
 }

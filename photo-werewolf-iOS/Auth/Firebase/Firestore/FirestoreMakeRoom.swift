@@ -12,7 +12,7 @@ struct FirestoreMakeRoom {
 
 	func makeRoom(roomName: String, gameType: String) {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
-		guard let user = FirebaseAuthBase().currentUser else {
+		guard let user = FirebaseAuthBase.shared.firestoreUser else {
 			return
 		}
 
@@ -22,11 +22,12 @@ struct FirestoreMakeRoom {
 
 		// roomドキュメントの作成
 		let docRef = firestoreBase.collection("rooms").document(randomNumber)
-		docRef.setData(["ownerId": "\(user.uid)",
-						"ownerName": "\(String(describing: user.displayName ?? ""))",
+		docRef.setData(["owner": "\(user.name)",
+						"ownerName": "\(String(describing: user.name ))",
 						"roomName": "\(roomName)",
 						"status": "\(RoomStatus.waiting.rawValue)",
-						"gameType": "\(gameType)"])
+						"gameType": "\(gameType)",
+						"createdAt": Timestamp(date: Date())])
 	}
 
 }

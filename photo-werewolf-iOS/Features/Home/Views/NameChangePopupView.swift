@@ -40,7 +40,7 @@ struct NameChangePopupView: View {
 					.padding()
 
 				Button(action: {
-					FirebaseAuthBase().setDisplayName(name: setName)
+					FirebaseAuthBase.shared.setDisplayName(name: setName)
 					withAnimation {
 						isPresent = false
 					}
