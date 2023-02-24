@@ -43,7 +43,7 @@ final public class FirebaseAuthBase {
 				switch error {
 				case DecodingError.valueNotFound(_, _):
 					print("ユーザーが存在しないので新規作成")
-					self.firestoreUser = FirestoreUser(name: "名無し")
+					self.firestoreUser = FirestoreUser(userId: user.uid, name: "名無し")
 					do {
 						try docRef.setData(from: self.firestoreUser)
 					}
@@ -75,5 +75,6 @@ final public class FirebaseAuthBase {
 // firestoreのユーザーデータを格納する構造体
 struct FirestoreUser: Codable {
 	@DocumentID var id: String?
+	var userId: String
 	var name: String
 }

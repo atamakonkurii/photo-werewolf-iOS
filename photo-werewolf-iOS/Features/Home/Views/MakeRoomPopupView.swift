@@ -43,8 +43,11 @@ struct MakeRoomPopupView: View {
 
 				Button {
 					withAnimation {
-						FirestoreMakeRoom().makeRoom(roomName: roomName, gameType: GameType.standard.rawValue)
-						viewModel.navigationWaitingRoom()
+						guard let gameRoom: GameRoom = FirestoreGameRoom().makeRoom(roomName: roomName, gameType: GameType.standard) else {
+							return
+						}
+
+						viewModel.navigationWaitingRoom(gameRoom: gameRoom)
 					}
 				} label: {
 					Text("決定")
