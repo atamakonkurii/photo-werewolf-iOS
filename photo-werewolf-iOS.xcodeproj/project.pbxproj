@@ -12,6 +12,7 @@
 		D502449E29476903005B3282 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D502449D29476903005B3282 /* FirebaseAuth */; };
 		D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D502449F29476903005B3282 /* FirebaseCrashlytics */; };
 		D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D50244A129476903005B3282 /* FirebaseFirestore */; };
+		D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506780A29A970D5001DB254 /* NavigationPath.swift */; };
 		D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */; };
 		D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */; };
 		D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		D5024498294767D1005B3282 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D506780A29A970D5001DB254 /* NavigationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPath.swift; sourceTree = "<group>"; };
 		D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MakeRoomPopupViewModel.swift; path = "photo-werewolf-iOS/Features/StandardGame/ViewModels/MakeRoomPopupViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomModel.swift; sourceTree = "<group>"; };
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthBase.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D506780929A970BE001DB254 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D506780A29A970D5001DB254 /* NavigationPath.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		D54B884429A7A4CC00D695A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 		D5914FF52922E8CE007E61D5 /* photo-werewolf-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D506780929A970BE001DB254 /* Navigation */,
 				D5D43DE929A4288F005C5C10 /* Utils */,
 				D57B3D55298956D5009E00A9 /* Auth */,
 				D57B3D5329895671009E00A9 /* Data */,
@@ -348,6 +359,7 @@
 			files = (
 				D5D4E5D3299EEFB300F9B1EE /* FirestoreGameRoom.swift in Sources */,
 				D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */,
+				D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */,
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
@@ -497,6 +509,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,6 +542,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

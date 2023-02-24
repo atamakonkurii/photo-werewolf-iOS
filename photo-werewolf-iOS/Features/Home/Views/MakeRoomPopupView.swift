@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MakeRoomPopupView: View {
 	@Binding var isPresent: Bool
+	@Binding var navigationPath: [NavigationPath]
 	@State private var roomName: String = ""
 	@StateObject var viewModel: MakeRoomViewModel
 
@@ -43,11 +44,12 @@ struct MakeRoomPopupView: View {
 
 				Button {
 					withAnimation {
+						// TODO: WaitingRoomにgameRoomの情報を渡す
 						guard let gameRoom: GameRoom = FirestoreGameRoom().makeRoom(roomName: roomName, gameType: GameType.standard) else {
 							return
 						}
-
-						viewModel.navigationWaitingRoom(gameRoom: gameRoom)
+						navigationPath.append(.waitingRoom)
+//						viewModel.navigationWaitingRoom(gameRoom: gameRoom)
 					}
 				} label: {
 					Text("決定")
@@ -59,10 +61,13 @@ struct MakeRoomPopupView: View {
 				.accentColor(Color.white)
 				.background(Color.orange)
 				.cornerRadius(26)
-
-				NavigationLink(destination: WaitingRoomView(), isActive: $viewModel.isActiveWaitingRoomView) {
-					EmptyView()
+				.navigationDestination(isPresented: $viewModel.isActiveWaitingRoomView) {
+					WaitingRoomView()
 				}
+
+//				NavigationLink(destination: WaitingRoomView(), isActive: $viewModel.isActiveWaitingRoomView) {
+//					EmptyView()
+//				}
 			}
 			.frame(width: 280, alignment: .center)
 			.padding()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NameChangePopupView: View {
 	@Binding var isPresent: Bool
+
 	@State private var setName: String = ""
 	var body: some View {
 		ZStack {
