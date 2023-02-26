@@ -9,7 +9,7 @@ import Foundation
 
 enum NavigationPath: Hashable {
 	case homeView
-	case waitingRoom
+	case waitingRoom(roomNumber: String)
 	case photoSelect
 	case confirmationRoll
 }

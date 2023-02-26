@@ -100,14 +100,14 @@ struct HomeView: View {
 			.navigationDestination(for: NavigationPath.self) { destination in
 				// TODO: 各Viewの画面遷移の実装を置き換える
 				switch destination {
-				case .waitingRoom:
-					WaitingRoomView()
+				case .waitingRoom(let roomNumber):
+					WaitingRoomView(roomNumber: roomNumber)
 				case .photoSelect:
 					PhotoSelectView()
 				case .confirmationRoll:
 					ConfirmationRollView()
 				case .homeView:
-					WaitingRoomView()
+					PhotoSelectView()
 				}
 			}
 		}

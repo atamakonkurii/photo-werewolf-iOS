@@ -44,12 +44,12 @@ struct MakeRoomPopupView: View {
 
 				Button {
 					withAnimation {
-						// TODO: WaitingRoomにgameRoomの情報を渡す
-						guard let gameRoom: GameRoom = FirestoreGameRoom().makeRoom(roomName: roomName, gameType: GameType.standard) else {
+						// WaitingRoomにgameRoomのroomNumberを渡す
+						guard let roomNumber: String = FirestoreGameRoom().makeRoom(roomName: roomName, gameType: GameType.standard) else {
 							return
 						}
-						navigationPath.append(.waitingRoom)
-//						viewModel.navigationWaitingRoom(gameRoom: gameRoom)
+
+						navigationPath.append(.waitingRoom(roomNumber: roomNumber))
 					}
 				} label: {
 					Text("決定")
@@ -61,13 +61,6 @@ struct MakeRoomPopupView: View {
 				.accentColor(Color.white)
 				.background(Color.orange)
 				.cornerRadius(26)
-				.navigationDestination(isPresented: $viewModel.isActiveWaitingRoomView) {
-					WaitingRoomView()
-				}
-
-//				NavigationLink(destination: WaitingRoomView(), isActive: $viewModel.isActiveWaitingRoomView) {
-//					EmptyView()
-//				}
 			}
 			.frame(width: 280, alignment: .center)
 			.padding()

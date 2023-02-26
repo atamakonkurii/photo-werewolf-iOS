@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 struct FirestoreGameRoom {
 	let firestoreBase = Firestore.firestore()
 
-	func makeRoom(roomName: String, gameType: GameType) -> GameRoom? {
+	func makeRoom(roomName: String, gameType: GameType) -> String? {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
 		guard let user = FirebaseAuthBase.shared.firestoreUser else {
 			return nil
@@ -30,7 +30,7 @@ struct FirestoreGameRoom {
 								createdAt: Timestamp())
 		do {
 			try docRef.setData(from: gameRoom)
-			return gameRoom
+			return randomNumber
 		} catch {
 			print(error)
 			return nil

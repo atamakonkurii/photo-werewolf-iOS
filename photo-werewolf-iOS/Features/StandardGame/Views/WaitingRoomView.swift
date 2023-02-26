@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-	let roomNumber: String = "50500"
+	let roomNumber: String
 	@Environment(\.dismiss) var dismiss
+
+	init(roomNumber: String) {
+		self.roomNumber = roomNumber
+	}
 
 	var body: some View {
 		ZStack {
@@ -190,6 +194,6 @@ struct WaitingRoomView: View {
 
 struct WaitingRoomView_Previews: PreviewProvider {
 	static var previews: some View {
-		WaitingRoomView()
+		WaitingRoomView(roomNumber: "051746")
 	}
 }
