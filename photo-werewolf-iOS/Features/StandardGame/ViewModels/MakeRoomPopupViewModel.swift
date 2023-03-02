@@ -15,8 +15,8 @@ class MakeRoomViewModel: ObservableObject {
 		self.model = model
 	}
 
-	func navigationWaitingRoom() {
-		model.navigationWaitingRoom()
+	func navigationWaitingRoom(gameRoom: GameRoom) {
+		model.navigationWaitingRoom(gameRoom: gameRoom)
 	}
 
 	var isActiveWaitingRoomView: Bool {

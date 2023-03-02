@@ -11,11 +11,12 @@ import FirebaseFirestore
 
 struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
+	@State private var navigationPath: [NavigationPath] = []
 
 	@State private var value1: String = ""
 
 	var body: some View {
-		NavigationView {
+		NavigationStack(path: $navigationPath) {
 			ZStack {
 				Color(red: 0.133, green: 0.157, blue: 0.192)
 					.ignoresSafeArea()
@@ -93,12 +94,26 @@ struct HomeView: View {
 				}
 
 				if viewModel.showingMakeRoomPopUp {
-					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp, viewModel: MakeRoomViewModel(model: MakeRoomModel()))
+					MakeRoomPopupView(isPresent: $viewModel.showingMakeRoomPopUp, navigationPath: $navigationPath, viewModel: MakeRoomViewModel(model: MakeRoomModel()))
 				}
 			}
-		}.onAppear {
+			.navigationDestination(for: NavigationPath.self) { destination in
+				// TODO: 各Viewの画面遷移の実装を置き換える
+				switch destination {
+				case .waitingRoom(let roomId):
+					WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: roomId)))
+				case .photoSelect:
+					PhotoSelectView()
+				case .confirmationRoll:
+					ConfirmationRollView()
+				case .homeView:
+					PhotoSelectView()
+				}
+			}
+		}
+		.onAppear {
 			// ログインしていない場合は匿名ログインをする
-			FirebaseAuthBase.shared.anonymousLogin()
+			FirebaseAuthClient.shared.anonymousLogin()
 		}
 	}
 }

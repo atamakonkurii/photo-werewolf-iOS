@@ -12,10 +12,13 @@
 		D502449E29476903005B3282 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D502449D29476903005B3282 /* FirebaseAuth */; };
 		D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D502449F29476903005B3282 /* FirebaseCrashlytics */; };
 		D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D50244A129476903005B3282 /* FirebaseFirestore */; };
+		D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506780A29A970D5001DB254 /* NavigationPath.swift */; };
 		D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */; };
 		D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */; };
+		D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536624F29AD598F0048B01F /* FetchStateEnum.swift */; };
+		D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536625129AD63FC0048B01F /* FirestoreApiClient.swift */; };
 		D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */; };
-		D57B3D58298957BF009E00A9 /* FIrebaseAuthBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */; };
+		D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */; };
 		D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */; };
 		D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */; };
 		D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */; };
@@ -26,17 +29,21 @@
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
 		D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */; };
 		D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */; };
-		D5D4E5D3299EEFB300F9B1EE /* FirestoreMakeRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D2299EEFB300F9B1EE /* FirestoreMakeRoom.swift */; };
 		D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */; };
 		D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */; };
 		D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */; };
+		D5DE27F829B011B900440C27 /* FIrestoreGameRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */; };
+		D5E48B7929ACEF5B002CC714 /* WaitingRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D5024498294767D1005B3282 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D506780A29A970D5001DB254 /* NavigationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPath.swift; sourceTree = "<group>"; };
 		D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MakeRoomPopupViewModel.swift; path = "photo-werewolf-iOS/Features/StandardGame/ViewModels/MakeRoomPopupViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomModel.swift; sourceTree = "<group>"; };
-		D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthBase.swift; sourceTree = "<group>"; };
+		D536624F29AD598F0048B01F /* FetchStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStateEnum.swift; sourceTree = "<group>"; };
+		D536625129AD63FC0048B01F /* FirestoreApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApiClient.swift; sourceTree = "<group>"; };
+		D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthClient.swift; sourceTree = "<group>"; };
 		D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChangePopupView.swift; sourceTree = "<group>"; };
 		D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomPopupView.swift; sourceTree = "<group>"; };
 		D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "photo-werewolf-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,10 +56,11 @@
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
 		D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationRollView.swift; sourceTree = "<group>"; };
 		D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEnum.swift; sourceTree = "<group>"; };
-		D5D4E5D2299EEFB300F9B1EE /* FirestoreMakeRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMakeRoom.swift; sourceTree = "<group>"; };
 		D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Features/Home/Models/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewModel.swift; sourceTree = "<group>"; };
+		D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrestoreGameRoom.swift; sourceTree = "<group>"; };
+		D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D506780929A970BE001DB254 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D506780A29A970D5001DB254 /* NavigationPath.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		D54B884429A7A4CC00D695A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +134,7 @@
 		D57B3D4B2989547E009E00A9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,14 +192,6 @@
 			path = CloudFIrestore;
 			sourceTree = "<group>";
 		};
-		D57B3D55298956D5009E00A9 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				D57B3D56298956E3009E00A9 /* Firebase */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
 		D57B3D56298956E3009E00A9 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,8 +221,9 @@
 		D5914FF52922E8CE007E61D5 /* photo-werewolf-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D506780929A970BE001DB254 /* Navigation */,
 				D5D43DE929A4288F005C5C10 /* Utils */,
-				D57B3D55298956D5009E00A9 /* Auth */,
+				D57B3D56298956E3009E00A9 /* Firebase */,
 				D57B3D5329895671009E00A9 /* Data */,
 				D57B3D4629895414009E00A9 /* Features */,
 				D5AD7E5A292535DC00BBA817 /* BuildTools */,
@@ -245,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */,
+				D536624F29AD598F0048B01F /* FetchStateEnum.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -252,7 +263,7 @@
 		D5D4E5D0299EED7F00F9B1EE /* FIrebaseAutentication */ = {
 			isa = PBXGroup;
 			children = (
-				D57B3D57298957BF009E00A9 /* FIrebaseAuthBase.swift */,
+				D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */,
 			);
 			path = FIrebaseAutentication;
 			sourceTree = "<group>";
@@ -260,7 +271,8 @@
 		D5D4E5D1299EEE1600F9B1EE /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
-				D5D4E5D2299EEFB300F9B1EE /* FirestoreMakeRoom.swift */,
+				D536625129AD63FC0048B01F /* FirestoreApiClient.swift */,
+				D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -346,17 +358,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5D4E5D3299EEFB300F9B1EE /* FirestoreMakeRoom.swift in Sources */,
+				D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */,
+				D5E48B7929ACEF5B002CC714 /* WaitingRoomModel.swift in Sources */,
 				D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */,
+				D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */,
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
 				D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */,
-				D57B3D58298957BF009E00A9 /* FIrebaseAuthBase.swift in Sources */,
+				D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */,
 				D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */,
 				D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */,
 				D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */,
 				D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */,
+				D5DE27F829B011B900440C27 /* FIrestoreGameRoom.swift in Sources */,
+				D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */,
 				D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */,
 				D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */,
 				D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */,
@@ -497,6 +513,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,6 +546,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

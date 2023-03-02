@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum GameType: String {
+enum GameType: String, Codable {
 	case standard
 }
 
-enum RoomStatus: String {
+enum RoomStatus: String, Codable {
 	case waiting
 	case inProgress
 	case done
