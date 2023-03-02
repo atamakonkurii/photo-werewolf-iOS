@@ -6,3 +6,25 @@
 //
 
 import Foundation
+
+@MainActor
+class WaitingRoomViewModel: ObservableObject {
+	@Published var model: WaitingRoomModel
+
+	init(model: WaitingRoomModel) {
+		self.model = model
+	}
+
+	var roomId: String {
+		return model.roomId
+	}
+
+	var fetchState: FetchState {
+		get {
+			return model.fetchState
+		}
+		set {
+			model.fetchState = newValue
+		}
+	}
+}

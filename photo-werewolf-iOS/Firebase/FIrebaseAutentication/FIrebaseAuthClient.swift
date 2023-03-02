@@ -9,17 +9,15 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final public class FirebaseAuthBase {
-	public static let shared = FirebaseAuthBase()
+final public class FirebaseAuthClient {
+	public static let shared = FirebaseAuthClient()
 	var firestoreUser: FirestoreUser?
-
-	let currentUser = Auth.auth().currentUser
 
 	private init() {}
 
 	func anonymousLogin() {
 		// 未ログインの場合、必ず匿名ログインをする
-		if currentUser == nil {
+		if Auth.auth().currentUser == nil {
 			Auth.auth().signInAnonymously { _, error in
 				if error != nil { return }
 			}
@@ -30,10 +28,10 @@ final public class FirebaseAuthBase {
 
 	func setFirestoreUser() {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
-		guard let user = currentUser else {
+		guard let user = Auth.auth().currentUser else {
 			return
 		}
-		let docRef = Firestore.firestore().collection("users").document(user.uid)
+		let docRef = FirestoreApiClient.shared.db.collection("users").document(user.uid)
 
 		docRef.getDocument(as: FirestoreUser.self) { result in
 			switch result {
@@ -55,12 +53,10 @@ final public class FirebaseAuthBase {
 				}
 			}
 		}
-
-
 	}
 
 	func setDisplayName(name: String) {
-		if let user = currentUser {
+		if let user = Auth.auth().currentUser {
 			let request = user.createProfileChangeRequest()
 			request.displayName = name
 			request.commitChanges { error in

@@ -100,8 +100,8 @@ struct HomeView: View {
 			.navigationDestination(for: NavigationPath.self) { destination in
 				// TODO: 各Viewの画面遷移の実装を置き換える
 				switch destination {
-				case .waitingRoom(let roomNumber):
-					WaitingRoomView(roomNumber: roomNumber)
+				case .waitingRoom(let roomId):
+					WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: roomId)))
 				case .photoSelect:
 					PhotoSelectView()
 				case .confirmationRoll:
@@ -113,7 +113,7 @@ struct HomeView: View {
 		}
 		.onAppear {
 			// ログインしていない場合は匿名ログインをする
-			FirebaseAuthBase.shared.anonymousLogin()
+			FirebaseAuthClient.shared.anonymousLogin()
 		}
 	}
 }

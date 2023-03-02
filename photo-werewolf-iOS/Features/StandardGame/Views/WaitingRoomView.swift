@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-	let roomNumber: String
+	@StateObject var viewModel: WaitingRoomViewModel
 	@Environment(\.dismiss) var dismiss
-
-	init(roomNumber: String) {
-		self.roomNumber = roomNumber
-	}
 
 	var body: some View {
 		ZStack {
@@ -47,11 +43,20 @@ struct WaitingRoomView: View {
 						)
 
 					VStack {
-						Text("写真人狼部屋")
-							.font(.system(size: 32, design: .rounded))
-							.foregroundColor(.white)
-							.fontWeight(.black)
-							.padding(.bottom, 8)
+						if let roomName = viewModel.model.gameRoom?.roomName {
+							Text("\(roomName)")
+								.font(.system(size: 32, design: .rounded))
+								.foregroundColor(.white)
+								.fontWeight(.black)
+								.padding(.bottom, 8)
+						} else {
+							Text("写真人狼部屋")
+								.font(.system(size: 32, design: .rounded))
+								.foregroundColor(.white)
+								.fontWeight(.black)
+								.padding(.bottom, 8)
+						}
+
 
 						HStack(alignment: .bottom) {
 							Text("部屋コード")
@@ -71,7 +76,7 @@ struct WaitingRoomView: View {
 						}
 
 						Button(action: {
-							UIPasteboard.general.string = "\(roomNumber)"
+							UIPasteboard.general.string = "\(viewModel.roomId)"
 						}, label: {
 							ZStack {
 								RoundedRectangle(cornerRadius: 24)
@@ -83,7 +88,7 @@ struct WaitingRoomView: View {
 										.foregroundColor(.gray)
 										.fontWeight(.black)
 
-									Text("\(roomNumber)")
+									Text("\(viewModel.roomId)")
 										.font(.system(size: 32, design: .rounded))
 										.foregroundColor(.black)
 										.fontWeight(.black)
@@ -194,6 +199,6 @@ struct WaitingRoomView: View {
 
 struct WaitingRoomView_Previews: PreviewProvider {
 	static var previews: some View {
-		WaitingRoomView(roomNumber: "051746")
+		WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: "098765")))
 	}
 }
