@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 extension FirestoreApiClient {
 
 	func subscriptionRoom(roomId: String, completion: @escaping (GameRoom?) -> Void) {
-		let litener = db.collection("rooms").document(roomId)
+		db.collection("rooms").document(roomId)
 			.addSnapshotListener { documentSnapshot, error in
 				guard let document = documentSnapshot else {
 					print("Error fetching document: \(error!)")
@@ -20,7 +20,6 @@ extension FirestoreApiClient {
 					return
 				}
 
-				// addSnapshotListenerを使っても,Codableの形で取り出せるようにしたい
 				do {
 					let gameRoom = try document.data(as: GameRoom.self)
 					completion(gameRoom)
