@@ -9,9 +9,9 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final public class FirebaseAuthClient {
+final public class FirebaseAuthClient: ObservableObject {
 	public static let shared = FirebaseAuthClient()
-	var firestoreUser: FirestoreUser?
+	@Published var firestoreUser: User?
 
 	private init() {}
 
@@ -33,7 +33,7 @@ final public class FirebaseAuthClient {
 		}
 		let docRef = FirestoreApiClient.shared.db.collection("users").document(user.uid)
 
-		docRef.getDocument(as: FirestoreUser.self) { result in
+		docRef.getDocument(as: User.self) { result in
 			switch result {
 			case .success(let firestoreUser):
 				self.firestoreUser = firestoreUser
@@ -41,7 +41,7 @@ final public class FirebaseAuthClient {
 				switch error {
 				case DecodingError.valueNotFound(_, _):
 					print("ユーザーが存在しないので新規作成")
-					self.firestoreUser = FirestoreUser(userId: user.uid, name: "名無し")
+					self.firestoreUser = User(userId: user.uid, name: "名無し")
 					do {
 						try docRef.setData(from: self.firestoreUser)
 					}
@@ -55,22 +55,15 @@ final public class FirebaseAuthClient {
 		}
 	}
 
-	func setDisplayName(name: String) {
+	func setDisplayName(name: String) async {
 		if let user = Auth.auth().currentUser {
-			let request = user.createProfileChangeRequest()
-			request.displayName = name
-			request.commitChanges { error in
-				if error == nil {
-					print("名前を設定しました")
-				}
+			let docRef = FirestoreApiClient.shared.db.collection("users").document(user.uid)
+			do {
+				try await docRef.updateData(["name": "\(name)"])
+				setFirestoreUser()
+			} catch {
+				print(error)
 			}
 		}
 	}
-}
-
-// firestoreのユーザーデータを格納する構造体
-struct FirestoreUser: Codable {
-	@DocumentID var id: String?
-	var userId: String
-	var name: String
 }

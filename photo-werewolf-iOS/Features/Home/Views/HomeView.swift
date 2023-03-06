@@ -11,9 +11,11 @@ import FirebaseFirestore
 
 struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
+	@StateObject var firebaseAuth: FirebaseAuthClient
+
 	@State private var navigationPath: [NavigationPath] = []
 
-	@State private var value1: String = ""
+	@State private var roomIdText: String = ""
 
 	var body: some View {
 		NavigationStack(path: $navigationPath) {
@@ -33,7 +35,7 @@ struct HomeView: View {
 								viewModel.showingNameChangePopUp = true
 							}
 						}, label: {
-							Text("\(Auth.auth().currentUser?.displayName ?? "ななし")")
+							Text("\(firebaseAuth.firestoreUser?.name ?? "ななし")")
 								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.medium)
@@ -59,7 +61,7 @@ struct HomeView: View {
 						.foregroundColor(.white)
 						.fontWeight(.black)
 
-					TextField("# _ _ _ _ _", text: $value1)
+					TextField("# _ _ _ _ _", text: $roomIdText)
 						.textFieldStyle(RoundedBorderTextFieldStyle())
 						.font(.system(size: 32))
 						.frame(width: 200.0)
@@ -120,6 +122,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeView(viewModel: HomeViewModel(model: HomeModel()))
+		HomeView(viewModel: HomeViewModel(model: HomeModel()), firebaseAuth: FirebaseAuthClient.shared)
 	}
 }

@@ -25,7 +25,7 @@ struct 	PhotoWerewolfIosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView(viewModel: HomeViewModel(model: HomeModel()))
+			HomeView(viewModel: HomeViewModel(model: HomeModel()), firebaseAuth: FirebaseAuthClient.shared)
         }
     }
 }

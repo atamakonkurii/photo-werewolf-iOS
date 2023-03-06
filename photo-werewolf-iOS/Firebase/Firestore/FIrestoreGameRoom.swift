@@ -50,19 +50,14 @@ extension FirestoreApiClient {
 								createdAt: Timestamp())
 		do {
 			try docRef.setData(from: gameRoom)
+			guard let userId = user.id  else {
+				return nil
+			}
+			try docRef.collection("users").document(userId).setData(from: user)
 			return roomId
 		} catch {
 			print(error)
 			return nil
 		}
 	}
-}
-
-struct GameRoom: Codable {
-	@DocumentID var id: String?
-	var owner: FirestoreUser
-	var roomName: String
-	var status: RoomStatus
-	var gameType: GameType
-	@ServerTimestamp var createdAt: Timestamp?
 }

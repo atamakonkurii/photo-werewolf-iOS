@@ -9,8 +9,8 @@ import SwiftUI
 
 struct NameChangePopupView: View {
 	@Binding var isPresent: Bool
-
 	@State private var setName: String = ""
+
 	var body: some View {
 		ZStack {
 			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
@@ -41,7 +41,9 @@ struct NameChangePopupView: View {
 					.padding()
 
 				Button(action: {
-					FirebaseAuthClient.shared.setDisplayName(name: setName)
+					Task {
+						await FirebaseAuthClient.shared.setDisplayName(name: setName)
+					}
 					withAnimation {
 						isPresent = false
 					}
