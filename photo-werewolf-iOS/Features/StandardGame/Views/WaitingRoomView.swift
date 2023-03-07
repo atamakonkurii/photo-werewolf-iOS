@@ -43,7 +43,7 @@ struct WaitingRoomView: View {
 						)
 
 					VStack {
-						if let roomName = viewModel.model.gameRoom?.roomName {
+						if let roomName = viewModel.gameRoom?.roomName {
 							Text("\(roomName)")
 								.font(.system(size: 32, design: .rounded))
 								.foregroundColor(.white)
@@ -129,42 +129,21 @@ struct WaitingRoomView: View {
 								.padding(.bottom, 8)
 
 							VStack(alignment: .leading, spacing: 8) {
-								Text("かずお")
-									.font(.system(size: 16, design: .rounded))
-									.foregroundColor(.white)
-									.fontWeight(.black)
 
-								Text("かずお")
-									.font(.system(size: 16, design: .rounded))
-									.foregroundColor(.white)
-									.fontWeight(.black)
+								// usersから取得したユーザーの名前を表示する
+								ForEach(viewModel.users) { user in
+									Text("\(user.name)")
+										.font(.system(size: 16, design: .rounded))
+										.foregroundColor(.white)
+										.fontWeight(.black)
+								}
 
-								Text("かずお")
-									.font(.system(size: 16, design: .rounded))
-									.foregroundColor(.white)
-									.fontWeight(.black)
-
-								Text("かずお")
-									.font(.system(size: 16, design: .rounded))
-									.foregroundColor(.white)
-									.fontWeight(.black)
-
-								Text("かずお")
-									.font(.system(size: 16, design: .rounded))
-									.foregroundColor(.white)
-									.fontWeight(.black)
-
-								Rectangle()
-									.fill(.gray)
-									.frame(height: 24)
-
-								Rectangle()
-									.fill(.gray)
-									.frame(height: 24)
-
-								Rectangle()
-									.fill(.gray)
-									.frame(height: 24)
+								// スケルトンスクリーンを表示
+								ForEach(0..<( 7 - viewModel.users.count ), id: \.self) { _ in
+									Rectangle()
+										.fill(.gray)
+										.frame(height: 24)
+								}
 							}
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)

@@ -27,4 +27,12 @@ class WaitingRoomViewModel: ObservableObject {
 			model.fetchState = newValue
 		}
 	}
+
+	var gameRoom: GameRoom? {
+		return model.gameRoom
+	}
+
+	var users: [User] {
+		return model.users
+	}
 }

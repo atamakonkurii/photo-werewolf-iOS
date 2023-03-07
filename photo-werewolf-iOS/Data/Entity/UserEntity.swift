@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 // firestoreのユーザーデータを格納する構造体
-struct User: Codable {
+struct User: Codable, Identifiable {
 	@DocumentID var id: String?
 	var userId: String
 	var name: String
