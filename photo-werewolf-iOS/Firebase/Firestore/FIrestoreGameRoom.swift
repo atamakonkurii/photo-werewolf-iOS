@@ -31,6 +31,31 @@ extension FirestoreApiClient {
 			}
 	}
 
+	func subscriptionRoomUsers(roomId: String, completion: @escaping ([User]?) -> Void) {
+		db.collection("rooms").document(roomId)
+			.collection("users")
+			.addSnapshotListener { documentSnapshot, error in
+				guard let documents = documentSnapshot?.documents else {
+					print("Error fetching document: \(error!)")
+					completion(nil)
+					return
+				}
+
+				do {
+					let users = try documents.compactMap {
+						return try $0.data(as: User.self)
+					}
+					print("users")
+					print("\(users)")
+					completion(users)
+				} catch {
+					print("error")
+					completion(nil)
+					return
+				}
+			}
+	}
+
 	func postRoom(roomName: String, gameType: GameType) -> String? {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
 		guard let user = FirebaseAuthClient.shared.firestoreUser else {
