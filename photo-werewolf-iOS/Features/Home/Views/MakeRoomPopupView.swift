@@ -43,14 +43,17 @@ struct MakeRoomPopupView: View {
 					.padding()
 
 				Button {
-					withAnimation {
+					Task {
 						// WaitingRoomにgameRoomのroomNumberを渡す
-						guard let roomId: String = FirestoreApiClient.shared.postRoom(roomName: roomName, gameType: GameType.standard) else {
+						let roomId = await FirestoreApiClient.shared.postGameRoom(roomName: roomName, gameType: GameType.standard)
+
+						guard let roomId = roomId else {
 							return
 						}
 
 						navigationPath.append(.waitingRoom(roomId: roomId))
 					}
+
 				} label: {
 					Text("決定")
 						.font(.system(size: 24, design: .rounded))

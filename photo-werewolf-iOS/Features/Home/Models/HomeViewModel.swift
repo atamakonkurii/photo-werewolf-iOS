@@ -32,4 +32,12 @@ class HomeViewModel: ObservableObject {
 			model.showingNameChangePopUp = newValue
 		}
 	}
+
+	func getGameRoom(roomId: String) async throws -> GameRoom? {
+		try await model.getGameRoom(roomId: roomId)
+	}
+
+	func postGameRoomUser(roomId: String) async throws {
+		try await model.postGameRoomUser(roomId: roomId)
+	}
 }

@@ -61,7 +61,25 @@ struct HomeView: View {
 						.foregroundColor(.white)
 						.fontWeight(.black)
 
-					TextField("# _ _ _ _ _", text: $roomIdText)
+					TextField("# _ _ _ _ _", text: $roomIdText,
+							onCommit: {
+								// 部屋が存在していた時だけ待機部屋に進む
+								Task {
+									// 部屋を取得
+									let gameRoom = try await viewModel.getGameRoom(roomId: roomIdText)
+
+									// 存在判定
+									guard gameRoom != nil else {
+										return
+									}
+
+									// 部屋にユーザーを追加
+									try await viewModel.postGameRoomUser(roomId: roomIdText)
+
+									navigationPath.append(.waitingRoom(roomId: roomIdText))
+								}
+							}
+						)
 						.textFieldStyle(RoundedBorderTextFieldStyle())
 						.font(.system(size: 32))
 						.frame(width: 200.0)

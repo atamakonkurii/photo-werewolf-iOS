@@ -11,6 +11,11 @@ import FirebaseFirestoreSwift
 // FirestoreGameRoom
 extension FirestoreApiClient {
 
+	func getGameRoom(roomId: String) async throws -> GameRoom? {
+		let gameRoom = try await db.collection("rooms").document(roomId).getDocument(as: GameRoom.self)
+		return gameRoom
+	}
+
 	func subscriptionRoom(roomId: String, completion: @escaping (GameRoom?) -> Void) {
 		db.collection("rooms").document(roomId)
 			.addSnapshotListener { documentSnapshot, error in
@@ -23,6 +28,7 @@ extension FirestoreApiClient {
 				do {
 					let gameRoom = try document.data(as: GameRoom.self)
 					completion(gameRoom)
+					return
 				} catch {
 					print("error")
 					completion(nil)
@@ -45,9 +51,8 @@ extension FirestoreApiClient {
 					let users = try documents.compactMap {
 						return try $0.data(as: User.self)
 					}
-					print("users")
-					print("\(users)")
 					completion(users)
+					return
 				} catch {
 					print("error")
 					completion(nil)
@@ -56,8 +61,8 @@ extension FirestoreApiClient {
 			}
 	}
 
-	func postRoom(roomName: String, gameType: GameType) -> String? {
-		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
+	func postGameRoom(roomName: String, gameType: GameType) async -> String? {
+		// 現在ログイン中のユーザー取得
 		guard let user = FirebaseAuthClient.shared.firestoreUser else {
 			return nil
 		}
@@ -75,14 +80,26 @@ extension FirestoreApiClient {
 								createdAt: Timestamp())
 		do {
 			try docRef.setData(from: gameRoom)
-			guard let userId = user.id  else {
-				return nil
-			}
-			try docRef.collection("users").document(userId).setData(from: user)
+			try await postGameRoomUser(roomId: roomId)
 			return roomId
 		} catch {
 			print(error)
 			return nil
 		}
+	}
+
+	func postGameRoomUser(roomId: String) async throws {
+		// roomドキュメントの作成
+		let docRef = db.collection("rooms").document(roomId)
+
+		guard let user = FirebaseAuthClient.shared.firestoreUser else {
+			return
+		}
+
+		guard let userId = user.id  else {
+			return
+		}
+
+		try docRef.collection("users").document(userId).setData(from: user)
 	}
 }
