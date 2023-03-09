@@ -7,26 +7,14 @@
 
 import Foundation
 
-class WaitingRoomModel {
+struct WaitingRoomModel {
 	let roomId: String
 	var fetchState: FetchState
 	var gameRoom: GameRoom? = nil
+	var users: [User] = []
 
 	init(roomId: String) {
 		self.roomId = roomId
 		self.fetchState = .loading
-		subscriptionRoom(roomId: roomId)
-	}
-
-	func subscriptionRoom(roomId: String) {
-		FirestoreApiClient.shared.subscriptionRoom(roomId: roomId) { result in
-			if let gameRoom = result {
-				self.gameRoom = gameRoom
-				print("sucess:\(String(describing: self.gameRoom))")
-			} else {
-				self.gameRoom = nil
-				print("fail:\(String(describing: self.gameRoom))")
-			}
-		}
 	}
 }

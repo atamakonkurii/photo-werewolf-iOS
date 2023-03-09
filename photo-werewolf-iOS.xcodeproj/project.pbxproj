@@ -21,6 +21,8 @@
 		D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */; };
 		D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */; };
 		D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */; };
+		D5906E5129B69C92000CED9F /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5906E5029B69C92000CED9F /* UserEntity.swift */; };
+		D5906E5329B69D5C000CED9F /* GameRoomEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5906E5229B69D5C000CED9F /* GameRoomEntity.swift */; };
 		D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */; };
 		D5914FFB2922E8D2007E61D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFA2922E8D2007E61D5 /* Assets.xcassets */; };
 		D5914FFE2922E8D2007E61D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFD2922E8D2007E61D5 /* Preview Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthClient.swift; sourceTree = "<group>"; };
 		D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChangePopupView.swift; sourceTree = "<group>"; };
 		D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomPopupView.swift; sourceTree = "<group>"; };
+		D5906E5029B69C92000CED9F /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		D5906E5229B69D5C000CED9F /* GameRoomEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoomEntity.swift; sourceTree = "<group>"; };
 		D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "photo-werewolf-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5914FF62922E8CE007E61D5 /* PhotoWerewolfIosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWerewolfIosApp.swift; sourceTree = "<group>"; };
 		D5914FFA2922E8D2007E61D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -180,16 +184,9 @@
 		D57B3D5329895671009E00A9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				D57B3D54298956C8009E00A9 /* CloudFIrestore */,
+				D5906E4F29B69C6B000CED9F /* Entity */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		D57B3D54298956C8009E00A9 /* CloudFIrestore */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CloudFIrestore;
 			sourceTree = "<group>";
 		};
 		D57B3D56298956E3009E00A9 /* Firebase */ = {
@@ -199,6 +196,15 @@
 				D5D4E5D0299EED7F00F9B1EE /* FIrebaseAutentication */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		D5906E4F29B69C6B000CED9F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				D5906E5029B69C92000CED9F /* UserEntity.swift */,
+				D5906E5229B69D5C000CED9F /* GameRoomEntity.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		D5914FEA2922E8CE007E61D5 = {
@@ -361,12 +367,14 @@
 				D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */,
 				D5E48B7929ACEF5B002CC714 /* WaitingRoomModel.swift in Sources */,
 				D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */,
+				D5906E5129B69C92000CED9F /* UserEntity.swift in Sources */,
 				D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */,
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
 				D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */,
 				D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */,
+				D5906E5329B69D5C000CED9F /* GameRoomEntity.swift in Sources */,
 				D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */,
 				D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */,
 				D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */,
