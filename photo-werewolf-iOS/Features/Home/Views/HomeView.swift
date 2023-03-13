@@ -76,7 +76,7 @@ struct HomeView: View {
 									// 部屋にユーザーを追加
 									try await viewModel.postGameRoomUser(roomId: roomIdText)
 
-									navigationPath.append(.waitingRoom(roomId: roomIdText))
+									navigationPath.append(.standardGame(roomId: roomIdText))
 								}
 							}
 						)
@@ -120,12 +120,8 @@ struct HomeView: View {
 			.navigationDestination(for: NavigationPath.self) { destination in
 				// TODO: 各Viewの画面遷移の実装を置き換える
 				switch destination {
-				case .waitingRoom(let roomId):
-					WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: roomId)))
-				case .photoSelect:
-					PhotoSelectView()
-				case .confirmationRoll:
-					ConfirmationRollView()
+				case .standardGame(let roomId):
+					StandardGameView(viewModel: StandardGameViewModel(model: StandardGameModel(roomId: roomId)), navigationPath: $navigationPath)
 				case .homeView:
 					PhotoSelectView()
 				}

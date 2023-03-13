@@ -15,6 +15,9 @@
 		D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506780A29A970D5001DB254 /* NavigationPath.swift */; };
 		D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */; };
 		D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */; };
+		D527CCFD29BFDB7F0097D58F /* StandardGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527CCFC29BFDB7F0097D58F /* StandardGameView.swift */; };
+		D527CD0029BFDBFB0097D58F /* StandardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527CCFF29BFDBFB0097D58F /* StandardGameViewModel.swift */; };
+		D527CD0229BFDC1D0097D58F /* StandardGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */; };
 		D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536624F29AD598F0048B01F /* FetchStateEnum.swift */; };
 		D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536625129AD63FC0048B01F /* FirestoreApiClient.swift */; };
 		D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */; };
@@ -35,7 +38,6 @@
 		D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */; };
 		D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */; };
 		D5DE27F829B011B900440C27 /* FIrestoreGameRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */; };
-		D5E48B7929ACEF5B002CC714 /* WaitingRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,9 @@
 		D506780A29A970D5001DB254 /* NavigationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPath.swift; sourceTree = "<group>"; };
 		D50963D8299D067500D1CD8D /* MakeRoomPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MakeRoomPopupViewModel.swift; path = "photo-werewolf-iOS/Features/StandardGame/ViewModels/MakeRoomPopupViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D50963DA299D06EB00D1CD8D /* MakeRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomModel.swift; sourceTree = "<group>"; };
+		D527CCFC29BFDB7F0097D58F /* StandardGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGameView.swift; sourceTree = "<group>"; };
+		D527CCFF29BFDBFB0097D58F /* StandardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGameViewModel.swift; sourceTree = "<group>"; };
+		D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGameModel.swift; sourceTree = "<group>"; };
 		D536624F29AD598F0048B01F /* FetchStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStateEnum.swift; sourceTree = "<group>"; };
 		D536625129AD63FC0048B01F /* FirestoreApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApiClient.swift; sourceTree = "<group>"; };
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthClient.swift; sourceTree = "<group>"; };
@@ -64,7 +69,6 @@
 		D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Features/Home/Models/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewModel.swift; sourceTree = "<group>"; };
 		D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrestoreGameRoom.swift; sourceTree = "<group>"; };
-		D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,31 @@
 				D506780A29A970D5001DB254 /* NavigationPath.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		D527CCFE29BFDBA80097D58F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */,
+				D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */,
+				D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D527CD0329BFDC250097D58F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D527CD0429BFDC340097D58F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D54B884429A7A4CC00D695A3 /* Frameworks */ = {
@@ -120,7 +149,8 @@
 		D57B3D4929895440009E00A9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				D5DD45C8298C021F002CC939 /* WaitingRoomViewModel.swift */,
+				D527CD0429BFDC340097D58F /* Components */,
+				D527CCFF29BFDBFB0097D58F /* StandardGameViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -128,9 +158,8 @@
 		D57B3D4A29895471009E00A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */,
-				D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */,
-				D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */,
+				D527CCFC29BFDB7F0097D58F /* StandardGameView.swift */,
+				D527CCFE29BFDBA80097D58F /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,7 +167,8 @@
 		D57B3D4B2989547E009E00A9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D5E48B7829ACEF5B002CC714 /* WaitingRoomModel.swift */,
+				D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */,
+				D527CD0329BFDC250097D58F /* Components */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,11 +394,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D527CD0029BFDBFB0097D58F /* StandardGameViewModel.swift in Sources */,
 				D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */,
-				D5E48B7929ACEF5B002CC714 /* WaitingRoomModel.swift in Sources */,
 				D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */,
 				D5906E5129B69C92000CED9F /* UserEntity.swift in Sources */,
 				D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */,
+				D527CD0229BFDC1D0097D58F /* StandardGameModel.swift in Sources */,
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
@@ -383,6 +414,7 @@
 				D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */,
 				D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */,
 				D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */,
+				D527CCFD29BFDB7F0097D58F /* StandardGameView.swift in Sources */,
 				D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */,
 				D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */,
 			);

@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 // FirestoreGameRoom
 extension FirestoreApiClient {
 
+	// GET
 	func getGameRoom(roomId: String) async throws -> GameRoom? {
 		let gameRoom = try await db.collection("rooms").document(roomId).getDocument(as: GameRoom.self)
 		return gameRoom
@@ -61,6 +62,7 @@ extension FirestoreApiClient {
 			}
 	}
 
+	// POST
 	func postGameRoom(roomName: String, gameType: GameType) async -> String? {
 		// 現在ログイン中のユーザー取得
 		guard let user = FirebaseAuthClient.shared.firestoreUser else {
@@ -102,4 +104,15 @@ extension FirestoreApiClient {
 
 		try docRef.collection("users").document(userId).setData(from: user)
 	}
+
+	func updateStatusGameRoom(roomId: String, status: RoomStatus) async {
+		let docRef = db.collection("rooms").document(roomId)
+
+		do {
+			try await docRef.updateData(["status": "\(status.rawValue)"])
+		} catch {
+			print(error)
+		}
+	}
+
 }

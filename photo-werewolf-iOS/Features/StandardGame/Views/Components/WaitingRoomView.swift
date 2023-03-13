@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-	@StateObject var viewModel: WaitingRoomViewModel
+	var viewModel: WaitingRoomViewModel
+	var gameRoom: GameRoom?
+	var users: [User]
+	var roomId: String
 	@Environment(\.dismiss) var dismiss
 
 	var body: some View {
@@ -43,7 +46,7 @@ struct WaitingRoomView: View {
 						)
 
 					VStack {
-						if let roomName = viewModel.gameRoom?.roomName {
+						if let roomName = gameRoom?.roomName {
 							Text("\(roomName)")
 								.font(.system(size: 32, design: .rounded))
 								.foregroundColor(.white)
@@ -76,7 +79,7 @@ struct WaitingRoomView: View {
 						}
 
 						Button(action: {
-							UIPasteboard.general.string = "\(viewModel.roomId)"
+							UIPasteboard.general.string = "\(roomId)"
 						}, label: {
 							ZStack {
 								RoundedRectangle(cornerRadius: 24)
@@ -88,7 +91,7 @@ struct WaitingRoomView: View {
 										.foregroundColor(.gray)
 										.fontWeight(.black)
 
-									Text("\(viewModel.roomId)")
+									Text("\(roomId)")
 										.font(.system(size: 32, design: .rounded))
 										.foregroundColor(.black)
 										.fontWeight(.black)
@@ -131,7 +134,7 @@ struct WaitingRoomView: View {
 							VStack(alignment: .leading, spacing: 8) {
 
 								// usersから取得したユーザーの名前を表示する
-								ForEach(viewModel.users) { user in
+								ForEach(users) { user in
 									Text("\(user.name)")
 										.font(.system(size: 16, design: .rounded))
 										.foregroundColor(.white)
@@ -139,7 +142,7 @@ struct WaitingRoomView: View {
 								}
 
 								// スケルトンスクリーンを表示
-								ForEach(0..<( 7 - viewModel.users.count ), id: \.self) { _ in
+								ForEach(0..<( 7 - users.count ), id: \.self) { _ in
 									Rectangle()
 										.fill(.gray)
 										.frame(height: 24)
@@ -148,16 +151,33 @@ struct WaitingRoomView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
-						NavigationLink(destination: PhotoSelectView()) {
-							Text("スタート")
-								.font(.system(size: 24, design: .rounded))
+						// オーナーのみスタートボタンが押せる
+						if gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId {
+							Button {
+								Task {
+									await viewModel.changeStatusToPhotoSelect(roomId: roomId)
+								}
+							} label: {
+								Text("スタート")
+									.font(.system(size: 24, design: .rounded))
+									.foregroundColor(.white)
+									.fontWeight(.black)
+									.padding()
+									.accentColor(Color.white)
+									.background(Color.orange)
+									.cornerRadius(32)
+							}
+
+						} else {
+							Text("オーナーの操作待ち")
+								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
+								.padding()
+								.accentColor(Color.white)
+								.background(Color.gray)
+								.cornerRadius(32)
 						}
-						.padding()
-						.accentColor(Color.white)
-						.background(Color.orange)
-						.cornerRadius(32)
 					}
 					.frame(width: 180)
 				}
@@ -176,8 +196,10 @@ struct WaitingRoomView: View {
 	}
 }
 
-struct WaitingRoomView_Previews: PreviewProvider {
-	static var previews: some View {
-		WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: "098765")))
-	}
-}
+//struct WaitingRoomView_Previews: PreviewProvider {
+//	@State static var navigationPath: [NavigationPath] = [.waitingRoom(roomId: "098765")]
+//
+//	static var previews: some View {
+//		WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: "098765")), navigationPath: $navigationPath)
+//	}
+//}
