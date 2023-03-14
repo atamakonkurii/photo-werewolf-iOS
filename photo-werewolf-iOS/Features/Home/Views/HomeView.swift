@@ -123,7 +123,7 @@ struct HomeView: View {
 				case .standardGame(let roomId):
 					StandardGameView(viewModel: StandardGameViewModel(model: StandardGameModel(roomId: roomId)), navigationPath: $navigationPath)
 				case .homeView:
-					PhotoSelectView()
+					EmptyView()
 				}
 			}
 		}

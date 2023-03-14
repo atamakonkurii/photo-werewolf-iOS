@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 
 struct GameRoom: Codable {
 	@DocumentID var id: String?
-	var owner: User
+	var owner: GameUser
 	var roomName: String
 	var status: RoomStatus
 	var gameType: GameType

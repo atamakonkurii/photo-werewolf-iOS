@@ -10,7 +10,7 @@ import Foundation
 struct StandardGameModel {
 	let roomId: String
 	var gameRoom: GameRoom? = nil
-	var users: [User] = []
+	var users: [GameUser] = []
 
 	init(roomId: String) {
 		self.roomId = roomId

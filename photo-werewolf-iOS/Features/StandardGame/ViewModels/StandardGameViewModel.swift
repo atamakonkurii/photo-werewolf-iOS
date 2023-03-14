@@ -29,7 +29,7 @@ class StandardGameViewModel: ObservableObject {
 		}
 	}
 
-	var users: [User] {
+	var users: [GameUser] {
 		get {
 			return model.users
 		}

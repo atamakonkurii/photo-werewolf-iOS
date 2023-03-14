@@ -14,3 +14,11 @@ struct User: Codable, Identifiable {
 	var userId: String
 	var name: String
 }
+
+//　ゲーム用のユーザー構造体
+struct GameUser: Codable, Identifiable {
+	@DocumentID var id: String?
+	var userId: String
+	var name: String
+	var photoUrl: String?
+}

@@ -10,7 +10,7 @@ import SwiftUI
 struct WaitingRoomView: View {
 	var viewModel: WaitingRoomViewModel
 	var gameRoom: GameRoom?
-	var users: [User]
+	var users: [GameUser]
 	var roomId: String
 	@Environment(\.dismiss) var dismiss
 
@@ -102,6 +102,8 @@ struct WaitingRoomView: View {
 					}
 				}
 				.frame(width: 300, height: 200)
+				
+				Spacer(minLength: 24)
 
 				ZStack {
 					Rectangle()
@@ -113,6 +115,9 @@ struct WaitingRoomView: View {
 						)
 
 					VStack {
+
+						Spacer(minLength: 24)
+
 						Group {
 							HStack(alignment: .bottom) {
 								Text("参加者")
@@ -139,6 +144,7 @@ struct WaitingRoomView: View {
 										.font(.system(size: 16, design: .rounded))
 										.foregroundColor(.white)
 										.fontWeight(.black)
+										.lineLimit(1)
 								}
 
 								// スケルトンスクリーンを表示
@@ -151,10 +157,13 @@ struct WaitingRoomView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
+						Spacer(minLength: 24)
+
 						// オーナーのみスタートボタンが押せる
 						if gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId {
 							Button {
 								Task {
+									// 写真選択画面に遷移する
 									await viewModel.changeStatusToPhotoSelect(roomId: roomId)
 								}
 							} label: {
@@ -178,6 +187,8 @@ struct WaitingRoomView: View {
 								.background(Color.gray)
 								.cornerRadius(32)
 						}
+
+						Spacer(minLength: 24)
 					}
 					.frame(width: 180)
 				}
@@ -196,10 +207,18 @@ struct WaitingRoomView: View {
 	}
 }
 
-//struct WaitingRoomView_Previews: PreviewProvider {
-//	@State static var navigationPath: [NavigationPath] = [.waitingRoom(roomId: "098765")]
-//
-//	static var previews: some View {
-//		WaitingRoomView(viewModel: WaitingRoomViewModel(model: WaitingRoomModel(roomId: "098765")), navigationPath: $navigationPath)
-//	}
-//}
+struct WaitingRoomView_Previews: PreviewProvider {
+	static private var gameRoom: GameRoom = GameRoom(owner: GameUser(userId: "testUserId01", name: "テストNAME01"),
+													 roomName: "テストルーム",
+													 status: .waiting,
+													 gameType: .standard,
+													 createdAt: nil)
+	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
+											GameUser(userId: "testUserId02", name: "テストNAME02"),
+											GameUser(userId: "testUserId03", name: "テストNAME03")]
+	static private var roomId: String = "111112"
+
+	static var previews: some View {
+		WaitingRoomView(viewModel: WaitingRoomViewModel(), gameRoom: gameRoom, users: users, roomId: roomId)
+	}
+}
