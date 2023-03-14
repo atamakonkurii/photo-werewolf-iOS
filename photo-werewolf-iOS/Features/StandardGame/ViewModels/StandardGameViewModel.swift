@@ -1,32 +1,23 @@
 //
-//  WaitingRoomViewModel.swift
+//  StandardGameViewModel.swift
 //  photo-werewolf-iOS
 //
-//  Created by 太田和希 on 2023/02/02.
+//  Created by 太田和希 on 2023/03/14.
 //
 
 import Foundation
 
 @MainActor
-class WaitingRoomViewModel: ObservableObject {
-	@Published var model: WaitingRoomModel
+class StandardGameViewModel: ObservableObject {
+	@Published var model: StandardGameModel
 
-	init(model: WaitingRoomModel) {
+	init(model: StandardGameModel) {
 		self.model = model
 		subscriptionGameRoom(roomId: model.roomId)
 	}
 
 	var roomId: String {
 		return model.roomId
-	}
-
-	var fetchState: FetchState {
-		get {
-			return model.fetchState
-		}
-		set {
-			model.fetchState = newValue
-		}
 	}
 
 	var gameRoom: GameRoom? {
@@ -38,7 +29,7 @@ class WaitingRoomViewModel: ObservableObject {
 		}
 	}
 
-	var users: [User] {
+	var users: [GameUser] {
 		get {
 			return model.users
 		}
@@ -47,6 +38,7 @@ class WaitingRoomViewModel: ObservableObject {
 		}
 	}
 
+	// サブスクリプション
 	func subscriptionGameRoom(roomId: String) {
 		FirestoreApiClient.shared.subscriptionRoom(roomId: roomId) { result in
 			if let gameRoom = result {

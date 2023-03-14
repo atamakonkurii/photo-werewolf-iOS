@@ -13,6 +13,10 @@ enum GameType: String, Codable {
 
 enum RoomStatus: String, Codable {
 	case waiting
-	case inProgress
+	case photoSelect
+	case rollCheck
+	case conversation
+	case vote
+	case result
 	case done
 }

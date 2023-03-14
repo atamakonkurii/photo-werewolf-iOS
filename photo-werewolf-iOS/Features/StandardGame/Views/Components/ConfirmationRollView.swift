@@ -114,7 +114,7 @@ struct ConfirmationRollView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
-						NavigationLink(destination: PhotoSelectView()) {
+						NavigationLink(destination: EmptyView()) {
 							Text("話し合いへ")
 								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)

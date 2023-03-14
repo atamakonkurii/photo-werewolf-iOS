@@ -51,7 +51,7 @@ struct MakeRoomPopupView: View {
 							return
 						}
 
-						navigationPath.append(.waitingRoom(roomId: roomId))
+						navigationPath.append(.standardGame(roomId: roomId))
 					}
 
 				} label: {

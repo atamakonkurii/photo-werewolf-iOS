@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PhotoSelectView: View {
+	var gameRoom: GameRoom?
+	var users: [GameUser]
+
 	@State var image: UIImage?
 	@State var showingAlert: Bool = false
 
@@ -35,12 +38,12 @@ struct PhotoSelectView: View {
 					if let image = image {
 						Image(uiImage: image)
 							.resizable()
-							.frame(width: 200, height: 200)
+							.frame(width: 180, height: 240)
 					} else {
 						Image(systemName: "photo")
 							.font(.system(size: 32, design: .rounded))
 							.foregroundColor(Color.white)
-							.frame(width: 200, height: 200)
+							.frame(width: 180, height: 240)
 							.background(Color(UIColor.lightGray))
 					}
 				}
@@ -56,71 +59,41 @@ struct PhotoSelectView: View {
 						)
 
 					VStack {
+						Spacer(minLength: 24)
+
 						Group {
 							Text("参加者")
-								.font(.system(size: 32, design: .rounded))
+								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
 								.padding(.bottom, 8)
 
 							VStack(alignment: .leading, spacing: 12) {
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
 
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
+								// usersから取得したユーザーの名前を表示する
+								ForEach(users) { user in
 
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.green)
+									HStack {
+										Image(systemName: "checkmark.circle.fill")
+											.font(.system(size: 16))
+											.foregroundColor(.gray)
 
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
+//										Image(systemName: "checkmark.circle.fill")
+//											.font(.system(size: 24))
+//											.foregroundColor(.green)
 
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.green)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
-
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
-
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
+										Text("\(user.name)")
+											.font(.system(size: 16, design: .rounded))
+											.foregroundColor(.white)
+											.fontWeight(.black)
+											.lineLimit(1)
+									}
 								}
 							}
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
+
+						Spacer(minLength: 24)
 
 						NavigationLink(destination: ConfirmationRollView()) {
 							Text("役職確認へ")
@@ -132,6 +105,8 @@ struct PhotoSelectView: View {
 						.accentColor(Color.white)
 						.background(Color.purple)
 						.cornerRadius(32)
+
+						Spacer(minLength: 24)
 					}
 					.frame(width: 180)
 				}
@@ -146,8 +121,12 @@ struct PhotoSelectView: View {
 }
 
 struct PhotoSelectView_Previews: PreviewProvider {
+	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
+											GameUser(userId: "testUserId02", name: "テストNAME02"),
+											GameUser(userId: "testUserId03", name: "テストNAME03")]
+
 	static var previews: some View {
-		PhotoSelectView()
+		PhotoSelectView(users: users)
 	}
 }
 

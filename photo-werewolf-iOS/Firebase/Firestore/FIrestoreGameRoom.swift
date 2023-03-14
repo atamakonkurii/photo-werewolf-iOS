@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 // FirestoreGameRoom
 extension FirestoreApiClient {
 
+	// GET
 	func getGameRoom(roomId: String) async throws -> GameRoom? {
 		let gameRoom = try await db.collection("rooms").document(roomId).getDocument(as: GameRoom.self)
 		return gameRoom
@@ -37,9 +38,9 @@ extension FirestoreApiClient {
 			}
 	}
 
-	func subscriptionRoomUsers(roomId: String, completion: @escaping ([User]?) -> Void) {
+	func subscriptionRoomUsers(roomId: String, completion: @escaping ([GameUser]?) -> Void) {
 		db.collection("rooms").document(roomId)
-			.collection("users")
+			.collection("gameUsers")
 			.addSnapshotListener { documentSnapshot, error in
 				guard let documents = documentSnapshot?.documents else {
 					print("Error fetching document: \(error!)")
@@ -49,7 +50,7 @@ extension FirestoreApiClient {
 
 				do {
 					let users = try documents.compactMap {
-						return try $0.data(as: User.self)
+						return try $0.data(as: GameUser.self)
 					}
 					completion(users)
 					return
@@ -61,6 +62,7 @@ extension FirestoreApiClient {
 			}
 	}
 
+	// POST
 	func postGameRoom(roomName: String, gameType: GameType) async -> String? {
 		// 現在ログイン中のユーザー取得
 		guard let user = FirebaseAuthClient.shared.firestoreUser else {
@@ -71,9 +73,11 @@ extension FirestoreApiClient {
 		let number = "0123456789"
 		let roomId = String((0..<6).map { _ in number.randomElement()!})
 
+		let gameUser: GameUser = GameUser(userId: user.userId, name: user.name, photoUrl: nil)
+
 		// roomドキュメントの作成
 		let docRef = db.collection("rooms").document(roomId)
-		let gameRoom = GameRoom(owner: user,
+		let gameRoom = GameRoom(owner: gameUser,
 								roomName: roomName,
 								status: RoomStatus.waiting,
 								gameType: gameType,
@@ -100,6 +104,19 @@ extension FirestoreApiClient {
 			return
 		}
 
-		try docRef.collection("users").document(userId).setData(from: user)
+		let gameUser: GameUser = GameUser(userId: user.userId, name: user.name, photoUrl: nil)
+
+		try docRef.collection("gameUsers").document(userId).setData(from: gameUser)
 	}
+
+	func updateStatusGameRoom(roomId: String, status: RoomStatus) async {
+		let docRef = db.collection("rooms").document(roomId)
+
+		do {
+			try await docRef.updateData(["status": "\(status.rawValue)"])
+		} catch {
+			print(error)
+		}
+	}
+
 }
