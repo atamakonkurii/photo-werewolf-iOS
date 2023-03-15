@@ -30,6 +30,9 @@
 		D5914FFB2922E8D2007E61D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFA2922E8D2007E61D5 /* Assets.xcassets */; };
 		D5914FFE2922E8D2007E61D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5914FFD2922E8D2007E61D5 /* Preview Assets.xcassets */; };
 		D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD7E55292530C600BBA817 /* HomeView.swift */; };
+		D5AD9ACA29C282D500984A16 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD9AC929C282D500984A16 /* ImagePicker.swift */; };
+		D5AD9ACC29C283C300984A16 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD9ACB29C283C300984A16 /* ImageView.swift */; };
+		D5AD9ACF29C286D600984A16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D5AD9ACE29C286D600984A16 /* Kingfisher */; };
 		D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */; };
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
 		D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */; };
@@ -61,6 +64,8 @@
 		D5914FFD2922E8D2007E61D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D5AD7E55292530C600BBA817 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D5AD7E5A292535DC00BBA817 /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = text; path = BuildTools; sourceTree = SOURCE_ROOT; };
+		D5AD9AC929C282D500984A16 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D5AD9ACB29C283C300984A16 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
 		D5C9B39629421AA40053DF89 /* ConfirmationRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationRollView.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5AD9ACF29C286D600984A16 /* Kingfisher in Frameworks */,
 				D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */,
 				D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */,
 				D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */,
@@ -158,6 +164,7 @@
 		D57B3D4A29895471009E00A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D5AD9AC829C2821300984A16 /* CostomUI */,
 				D527CCFC29BFDB7F0097D58F /* StandardGameView.swift */,
 				D527CCFE29BFDBA80097D58F /* Components */,
 			);
@@ -279,6 +286,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		D5AD9AC829C2821300984A16 /* CostomUI */ = {
+			isa = PBXGroup;
+			children = (
+				D5AD9AC929C282D500984A16 /* ImagePicker.swift */,
+				D5AD9ACB29C283C300984A16 /* ImageView.swift */,
+			);
+			path = CostomUI;
+			sourceTree = "<group>";
+		};
 		D5D43DE929A4288F005C5C10 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +351,7 @@
 				D502449F29476903005B3282 /* FirebaseCrashlytics */,
 				D50244A129476903005B3282 /* FirebaseFirestore */,
 				D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */,
+				D5AD9ACE29C286D600984A16 /* Kingfisher */,
 			);
 			productName = "photo-werewolf-iOS";
 			productReference = D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */;
@@ -366,6 +383,7 @@
 			mainGroup = D5914FEA2922E8CE007E61D5;
 			packageReferences = (
 				D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D5AD9ACD29C286D600984A16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D5914FF42922E8CE007E61D5 /* Products */;
 			projectDirPath = "";
@@ -394,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5AD9ACC29C283C300984A16 /* ImageView.swift in Sources */,
 				D527CD0029BFDBFB0097D58F /* StandardGameViewModel.swift in Sources */,
 				D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */,
 				D5AD7E56292530C600BBA817 /* HomeView.swift in Sources */,
@@ -415,6 +434,7 @@
 				D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */,
 				D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */,
 				D527CCFD29BFDB7F0097D58F /* StandardGameView.swift in Sources */,
+				D5AD9ACA29C282D500984A16 /* ImagePicker.swift in Sources */,
 				D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */,
 				D5C9B39729421AA40053DF89 /* ConfirmationRollView.swift in Sources */,
 			);
@@ -631,8 +651,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 10.5.0;
+			};
+		};
+		D5AD9ACD29C286D600984A16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -662,6 +690,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		D5AD9ACE29C286D600984A16 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5AD9ACD29C286D600984A16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

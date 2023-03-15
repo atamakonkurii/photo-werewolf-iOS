@@ -1,17 +1,10 @@
-//
-//  PhotoSelectView.swift
-//  photo-werewolf-iOS
-//
-//  Created by 太田和希 on 2022/12/08.
-//
-
 import SwiftUI
 
 struct PhotoSelectView: View {
 	var gameRoom: GameRoom?
 	var users: [GameUser]
 
-	@State var image: UIImage?
+	@State var selectedImage: UIImage?
 	@State var showingAlert: Bool = false
 
 	var body: some View {
@@ -35,7 +28,7 @@ struct PhotoSelectView: View {
 				Button {
 					showingAlert = true
 				} label: {
-					if let image = image {
+					if let image = selectedImage {
 						Image(uiImage: image)
 							.resizable()
 							.frame(width: 180, height: 240)
@@ -72,15 +65,17 @@ struct PhotoSelectView: View {
 
 								// usersから取得したユーザーの名前を表示する
 								ForEach(users) { user in
-
 									HStack {
-										Image(systemName: "checkmark.circle.fill")
-											.font(.system(size: 16))
-											.foregroundColor(.gray)
+										if user.photoUrl != nil {
+											Image(systemName: "checkmark.circle.fill")
+												.font(.system(size: 24))
+												.foregroundColor(.green)
+										} else {
 
-//										Image(systemName: "checkmark.circle.fill")
-//											.font(.system(size: 24))
-//											.foregroundColor(.green)
+											Image(systemName: "checkmark.circle.fill")
+													.font(.system(size: 16))
+													.foregroundColor(.gray)
+										}
 
 										Text("\(user.name)")
 											.font(.system(size: 16, design: .rounded))
@@ -112,13 +107,17 @@ struct PhotoSelectView: View {
 				}
 			}
 			.frame(width: 300)
-			.sheet(isPresented: $showingAlert) {
+			.sheet(isPresented: $showingAlert) { //onDismissで画像アップロードの関数を呼び出す
 			} content: {
-				ImagePicker(image: $image)
+				ImagePicker(image: $selectedImage)
 			}
 		}
 	}
 }
+
+
+
+
 
 struct PhotoSelectView_Previews: PreviewProvider {
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
@@ -127,50 +126,5 @@ struct PhotoSelectView_Previews: PreviewProvider {
 
 	static var previews: some View {
 		PhotoSelectView(users: users)
-	}
-}
-
-import PhotosUI
-
-struct ImagePicker: UIViewControllerRepresentable {
-	@Environment(\.presentationMode) var presentationMode
-	@Binding var image: UIImage?
-
-	func makeCoordinator() -> Coordinator {
-		Coordinator(self)
-	}
-
-	func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
-		var configuration = PHPickerConfiguration()
-		configuration.filter = .images
-		configuration.selectionLimit = 1
-		let picker = PHPickerViewController(configuration: configuration)
-		picker.delegate = context.coordinator
-		return picker
-	}
-
-	func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePicker>) {}
-
-	class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-		let parent: ImagePicker
-
-		init(_ parent: ImagePicker) {
-			self.parent = parent
-		}
-
-		func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-			parent.presentationMode.wrappedValue.dismiss()
-
-			if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-				itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
-					guard let image = image as? UIImage else {
-						return
-					}
-					DispatchQueue.main.sync {
-						self?.parent.image = image
-					}
-				}
-			}
-		}
 	}
 }
