@@ -20,6 +20,8 @@
 		D527CD0229BFDC1D0097D58F /* StandardGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */; };
 		D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536624F29AD598F0048B01F /* FetchStateEnum.swift */; };
 		D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536625129AD63FC0048B01F /* FirestoreApiClient.swift */; };
+		D548C15729C34E6900BFC84E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D548C15629C34E6900BFC84E /* FirebaseStorage */; };
+		D548C15929C3570900BFC84E /* FirestoreGameRoomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D548C15829C3570900BFC84E /* FirestoreGameRoomUser.swift */; };
 		D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */; };
 		D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */; };
 		D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */; };
@@ -53,6 +55,7 @@
 		D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGameModel.swift; sourceTree = "<group>"; };
 		D536624F29AD598F0048B01F /* FetchStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStateEnum.swift; sourceTree = "<group>"; };
 		D536625129AD63FC0048B01F /* FirestoreApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApiClient.swift; sourceTree = "<group>"; };
+		D548C15829C3570900BFC84E /* FirestoreGameRoomUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreGameRoomUser.swift; sourceTree = "<group>"; };
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthClient.swift; sourceTree = "<group>"; };
 		D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChangePopupView.swift; sourceTree = "<group>"; };
 		D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomPopupView.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 				D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */,
 				D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */,
 				D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */,
+				D548C15729C34E6900BFC84E /* FirebaseStorage in Frameworks */,
 				D502449C29476903005B3282 /* FirebaseAnalytics in Frameworks */,
 				D502449E29476903005B3282 /* FirebaseAuth in Frameworks */,
 			);
@@ -325,6 +329,7 @@
 			children = (
 				D536625129AD63FC0048B01F /* FirestoreApiClient.swift */,
 				D5DE27F729B011B900440C27 /* FIrestoreGameRoom.swift */,
+				D548C15829C3570900BFC84E /* FirestoreGameRoomUser.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 				D50244A129476903005B3282 /* FirebaseFirestore */,
 				D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */,
 				D5AD9ACE29C286D600984A16 /* Kingfisher */,
+				D548C15629C34E6900BFC84E /* FirebaseStorage */,
 			);
 			productName = "photo-werewolf-iOS";
 			productReference = D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */;
@@ -419,6 +425,7 @@
 				D5906E5129B69C92000CED9F /* UserEntity.swift in Sources */,
 				D506780B29A970D5001DB254 /* NavigationPath.swift in Sources */,
 				D527CD0229BFDC1D0097D58F /* StandardGameModel.swift in Sources */,
+				D548C15929C3570900BFC84E /* FirestoreGameRoomUser.swift in Sources */,
 				D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */,
 				D5DD45C9298C021F002CC939 /* WaitingRoomViewModel.swift in Sources */,
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
@@ -685,6 +692,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		D548C15629C34E6900BFC84E /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

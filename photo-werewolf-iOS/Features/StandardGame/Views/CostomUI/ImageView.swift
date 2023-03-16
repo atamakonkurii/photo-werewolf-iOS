@@ -11,7 +11,6 @@ struct ImageView: View {
 			.placeholder {
 				VStack {
 					ProgressView()
-					Text("Loading...")
 				}
 			}
 			.fade(duration: 0.25)

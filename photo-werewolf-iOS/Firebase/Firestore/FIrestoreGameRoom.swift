@@ -38,31 +38,7 @@ extension FirestoreApiClient {
 			}
 	}
 
-	func subscriptionRoomUsers(roomId: String, completion: @escaping ([GameUser]?) -> Void) {
-		db.collection("rooms").document(roomId)
-			.collection("gameUsers")
-			.addSnapshotListener { documentSnapshot, error in
-				guard let documents = documentSnapshot?.documents else {
-					print("Error fetching document: \(error!)")
-					completion(nil)
-					return
-				}
-
-				do {
-					let users = try documents.compactMap {
-						return try $0.data(as: GameUser.self)
-					}
-					completion(users)
-					return
-				} catch {
-					print("error")
-					completion(nil)
-					return
-				}
-			}
-	}
-
-	// POST
+	/// POST
 	func postGameRoom(roomName: String, gameType: GameType) async -> String? {
 		// 現在ログイン中のユーザー取得
 		guard let user = FirebaseAuthClient.shared.firestoreUser else {
@@ -92,23 +68,6 @@ extension FirestoreApiClient {
 		}
 	}
 
-	func postGameRoomUser(roomId: String) async throws {
-		// roomドキュメントの作成
-		let docRef = db.collection("rooms").document(roomId)
-
-		guard let user = FirebaseAuthClient.shared.firestoreUser else {
-			return
-		}
-
-		guard let userId = user.id  else {
-			return
-		}
-
-		let gameUser: GameUser = GameUser(userId: user.userId, name: user.name, photoUrl: nil)
-
-		try docRef.collection("gameUsers").document(userId).setData(from: gameUser)
-	}
-
 	func updateStatusGameRoom(roomId: String, status: RoomStatus) async {
 		let docRef = db.collection("rooms").document(roomId)
 
@@ -118,5 +77,4 @@ extension FirestoreApiClient {
 			print(error)
 		}
 	}
-
 }

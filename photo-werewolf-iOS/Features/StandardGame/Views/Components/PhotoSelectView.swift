@@ -1,11 +1,46 @@
 import SwiftUI
+import FirebaseStorage
+import Kingfisher
 
 struct PhotoSelectView: View {
 	var gameRoom: GameRoom?
 	var users: [GameUser]
 
-	@State var selectedImage: UIImage?
 	@State var showingAlert: Bool = false
+	@State var selectedImage: UIImage?
+	@State private var imageUrl: URL?
+	@State private var isLoading = false
+
+	private func uploadImage() {
+		isLoading = true
+
+		guard let image = selectedImage,
+			  let data = image.jpegData(compressionQuality: 0.5),
+			  let userId = FirebaseAuthClient.shared.firestoreUser?.userId else { return }
+
+		let storageRef = Storage.storage().reference().child("images/\(userId)/\(UUID().uuidString).jpg")
+
+
+		storageRef.putData(data, metadata: nil) { _, error in
+			if let error = error {
+				print("アップロードに失敗しました: \(error)")
+			} else {
+				storageRef.downloadURL { url, error in
+					if let error = error {
+						print("画像のURLの取得に失敗しました: \(error)")
+					} else if let url = url {
+						imageUrl = url
+						if let roomId = gameRoom?.id {
+							Task {
+								await FirestoreApiClient.shared.updatePhotoUrlGameRoomUser(roomId: roomId, imageUrl: url)
+								isLoading = false
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 	var body: some View {
 		ZStack {
@@ -26,18 +61,27 @@ struct PhotoSelectView: View {
 					.fontWeight(.black)
 
 				Button {
-					showingAlert = true
+					/// imageUrlが存在しない場合は画像選択する
+					if imageUrl == nil {
+						showingAlert = true
+					}
 				} label: {
-					if let image = selectedImage {
-						Image(uiImage: image)
-							.resizable()
-							.frame(width: 180, height: 240)
-					} else {
+					ZStack {
 						Image(systemName: "photo")
 							.font(.system(size: 32, design: .rounded))
 							.foregroundColor(Color.white)
 							.frame(width: 180, height: 240)
 							.background(Color(UIColor.lightGray))
+
+						if let imageUrl = imageUrl {
+							KFImage(imageUrl)
+								.resizable()
+								.frame(width: 180, height: 240)
+						} else {
+							if isLoading {
+								ProgressView()
+							}
+						}
 					}
 				}
 				.padding(.bottom, 16)
@@ -107,8 +151,7 @@ struct PhotoSelectView: View {
 				}
 			}
 			.frame(width: 300)
-			.sheet(isPresented: $showingAlert) { //onDismissで画像アップロードの関数を呼び出す
-			} content: {
+			.sheet(isPresented: $showingAlert, onDismiss: {uploadImage()}) {
 				ImagePicker(image: $selectedImage)
 			}
 		}
