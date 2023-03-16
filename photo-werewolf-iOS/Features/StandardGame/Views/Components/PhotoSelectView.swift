@@ -8,37 +8,25 @@ struct PhotoSelectView: View {
 
 	@State var showingAlert: Bool = false
 	@State var selectedImage: UIImage?
-	@State private var imageUrl: URL?
 	@State private var isLoading = false
 
 	private func uploadImage() {
+		guard let roomId = gameRoom?.id else { return }
 		isLoading = true
+		FirestorageApiClient.shared.uploadStandardGameUserPhoto(roomId: roomId, selectedImage: selectedImage)
+		isLoading = false
+	}
 
-		guard let image = selectedImage,
-			  let data = image.jpegData(compressionQuality: 0.5),
-			  let userId = FirebaseAuthClient.shared.firestoreUser?.userId else { return }
+	private var own: GameUser? {
+		get {
+			guard let ownUserId = FirebaseAuthClient.shared.firestoreUser?.userId else { return nil }
 
-		let storageRef = Storage.storage().reference().child("images/\(userId)/\(UUID().uuidString).jpg")
-
-
-		storageRef.putData(data, metadata: nil) { _, error in
-			if let error = error {
-				print("アップロードに失敗しました: \(error)")
-			} else {
-				storageRef.downloadURL { url, error in
-					if let error = error {
-						print("画像のURLの取得に失敗しました: \(error)")
-					} else if let url = url {
-						imageUrl = url
-						if let roomId = gameRoom?.id {
-							Task {
-								await FirestoreApiClient.shared.updatePhotoUrlGameRoomUser(roomId: roomId, imageUrl: url)
-								isLoading = false
-							}
-						}
-					}
+			for gameUser in users {
+				if gameUser.userId == ownUserId {
+					return gameUser
 				}
 			}
+			return nil
 		}
 	}
 
@@ -61,8 +49,8 @@ struct PhotoSelectView: View {
 					.fontWeight(.black)
 
 				Button {
-					/// imageUrlが存在しない場合は画像選択する
-					if imageUrl == nil {
+					/// photoUrlが存在しない場合は画像選択する
+					if own?.photoUrl == nil {
 						showingAlert = true
 					}
 				} label: {
@@ -73,8 +61,8 @@ struct PhotoSelectView: View {
 							.frame(width: 180, height: 240)
 							.background(Color(UIColor.lightGray))
 
-						if let imageUrl = imageUrl {
-							KFImage(imageUrl)
+						if let photoUrl = own?.photoUrl, let url = URL(string: photoUrl) {
+							KFImage(url)
 								.resizable()
 								.frame(width: 180, height: 240)
 						} else {
@@ -112,7 +100,7 @@ struct PhotoSelectView: View {
 									HStack {
 										if user.photoUrl != nil {
 											Image(systemName: "checkmark.circle.fill")
-												.font(.system(size: 24))
+												.font(.system(size: 16))
 												.foregroundColor(.green)
 										} else {
 
@@ -134,7 +122,7 @@ struct PhotoSelectView: View {
 
 						Spacer(minLength: 24)
 
-						NavigationLink(destination: ConfirmationRollView()) {
+						NavigationLink(destination: CheckRollView()) {
 							Text("役職確認へ")
 								.font(.system(size: 24, design: .rounded))
 								.foregroundColor(.white)
@@ -165,7 +153,9 @@ struct PhotoSelectView: View {
 struct PhotoSelectView_Previews: PreviewProvider {
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
 											GameUser(userId: "testUserId02", name: "テストNAME02"),
-											GameUser(userId: "testUserId03", name: "テストNAME03")]
+											GameUser(userId: "testUserId03", name: "テストNAME03"),
+											GameUser(userId: "testUserId04", name: "テストNAME04"),
+											GameUser(userId: "testUserId05", name: "テストNAME05")]
 
 	static var previews: some View {
 		PhotoSelectView(users: users)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ConfirmationRollView: View {
+struct CheckRollView: View {
 	@State var showingPopUp = false
     var body: some View {
 		ZStack {
@@ -175,6 +175,6 @@ struct ConfirmationRoolPopupView: View {
 
 struct ConfirmationRollView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationRollView()
+		CheckRollView()
     }
 }
