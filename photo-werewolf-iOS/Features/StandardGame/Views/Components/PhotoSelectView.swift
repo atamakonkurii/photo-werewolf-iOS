@@ -5,8 +5,9 @@ import Kingfisher
 struct PhotoSelectView: View {
 	var gameRoom: GameRoom?
 	var users: [GameUser]
+	var viewModel: PhotoSelectViewModel
 
-	@State var showingAlert: Bool = false
+	@State var isShowImagePicker: Bool = false
 	@State var selectedImage: UIImage?
 	@State private var isLoading = false
 
@@ -30,6 +31,14 @@ struct PhotoSelectView: View {
 		}
 	}
 
+	private var isOwner: Bool {
+		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
+	}
+
+	private var isEnableNextToScreen: Bool {
+		users.allSatisfy { $0.photoUrl != nil }
+	}
+
 	var body: some View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
@@ -51,7 +60,7 @@ struct PhotoSelectView: View {
 				Button {
 					/// photoUrlが存在しない場合は画像選択する
 					if own?.photoUrl == nil {
-						showingAlert = true
+						isShowImagePicker = true
 					}
 				} label: {
 					ZStack {
@@ -103,7 +112,6 @@ struct PhotoSelectView: View {
 												.font(.system(size: 16))
 												.foregroundColor(.green)
 										} else {
-
 											Image(systemName: "checkmark.circle.fill")
 													.font(.system(size: 16))
 													.foregroundColor(.gray)
@@ -122,16 +130,35 @@ struct PhotoSelectView: View {
 
 						Spacer(minLength: 24)
 
-						NavigationLink(destination: CheckRollView()) {
-							Text("役職確認へ")
-								.font(.system(size: 24, design: .rounded))
+						// オーナーのみ次の画面に進むボタンが押せる
+						if isOwner, isEnableNextToScreen {
+							Button {
+								Task {
+									guard let roomId = gameRoom?.id else { return }
+									// 写真選択画面に遷移する
+									await viewModel.changeStatusToRollCheck(roomId: roomId)
+								}
+							} label: {
+								Text("役職確認へ")
+									.font(.system(size: 24, design: .rounded))
+									.foregroundColor(.white)
+									.fontWeight(.black)
+									.padding()
+									.accentColor(Color.white)
+									.background(Color.purple)
+									.cornerRadius(32)
+							}
+
+						} else {
+							Text(isEnableNextToScreen ? "オーナーの操作待ち" : "全員の写真選択待ち")
+								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
+								.padding()
+								.accentColor(Color.white)
+								.background(Color.gray)
+								.cornerRadius(32)
 						}
-						.padding()
-						.accentColor(Color.white)
-						.background(Color.purple)
-						.cornerRadius(32)
 
 						Spacer(minLength: 24)
 					}
@@ -139,7 +166,7 @@ struct PhotoSelectView: View {
 				}
 			}
 			.frame(width: 300)
-			.sheet(isPresented: $showingAlert, onDismiss: {uploadImage()}) {
+			.sheet(isPresented: $isShowImagePicker, onDismiss: {uploadImage()}) {
 				ImagePicker(image: $selectedImage)
 			}
 		}
@@ -158,6 +185,6 @@ struct PhotoSelectView_Previews: PreviewProvider {
 											GameUser(userId: "testUserId05", name: "テストNAME05")]
 
 	static var previews: some View {
-		PhotoSelectView(users: users)
+		PhotoSelectView(users: users, viewModel: PhotoSelectViewModel())
 	}
 }

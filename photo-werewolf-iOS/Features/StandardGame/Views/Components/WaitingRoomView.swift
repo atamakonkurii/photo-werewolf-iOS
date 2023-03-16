@@ -14,7 +14,7 @@ struct WaitingRoomView: View {
 		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
 	}
 
-	private var isEnableStart: Bool {
+	private var isEnableNextToScreen: Bool {
 		users.count >= IS_ENABLE_STRAT_USER_COUNT
 	}
 
@@ -164,7 +164,7 @@ struct WaitingRoomView: View {
 						Spacer(minLength: 24)
 
 						// オーナーのみスタートボタンが押せる
-						if isOwner, isEnableStart {
+						if isOwner, isEnableNextToScreen {
 							Button {
 								Task {
 									// 写真選択画面に遷移する
@@ -182,7 +182,7 @@ struct WaitingRoomView: View {
 							}
 
 						} else {
-							Text(isEnableStart ? "オーナーの操作待ち" : "\(String(IS_ENABLE_STRAT_USER_COUNT))人〜スタートできます")
+							Text(isEnableNextToScreen ? "オーナーの操作待ち" : "\(String(IS_ENABLE_STRAT_USER_COUNT))人からスタートできます")
 								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
