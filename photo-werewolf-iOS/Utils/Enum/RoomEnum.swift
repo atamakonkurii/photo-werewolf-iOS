@@ -14,7 +14,7 @@ enum GameType: String, Codable {
 enum RoomStatus: String, Codable {
 	case waiting
 	case photoSelect
-	case rollCheck
+	case checkRoll
 	case conversation
 	case vote
 	case result

@@ -1,18 +1,22 @@
-//
-//  WaitingRoomView.swift
-//  photo-werewolf-iOS
-//
-//  Created by 太田和希 on 2022/12/07.
-//
-
 import SwiftUI
 
 struct WaitingRoomView: View {
+	let MAX_USER_COUNT = 8
+	let IS_ENABLE_STRAT_USER_COUNT = 5
+
 	var viewModel: WaitingRoomViewModel
 	var gameRoom: GameRoom?
 	var users: [GameUser]
 	var roomId: String
 	@Environment(\.dismiss) var dismiss
+
+	private var isOwner: Bool {
+		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
+	}
+
+	private var isEnableNextToScreen: Bool {
+		users.count >= IS_ENABLE_STRAT_USER_COUNT
+	}
 
 	var body: some View {
 		ZStack {
@@ -124,13 +128,13 @@ struct WaitingRoomView: View {
 									.font(.system(size: 24, design: .rounded))
 									.foregroundColor(.white)
 									.fontWeight(.black)
-								Text("5人~8人")
+								Text("\(String(IS_ENABLE_STRAT_USER_COUNT))人~\(String(MAX_USER_COUNT))人")
 									.font(.system(size: 12, design: .rounded))
 									.foregroundColor(.gray)
 									.fontWeight(.medium)
 							}
 
-							Text("5人集まったらスタートできます")
+							Text("\(String(IS_ENABLE_STRAT_USER_COUNT))人集まったらスタートできます")
 								.font(.system(size: 12, design: .rounded))
 								.foregroundColor(.gray)
 								.fontWeight(.medium)
@@ -148,7 +152,7 @@ struct WaitingRoomView: View {
 								}
 
 								// スケルトンスクリーンを表示
-								ForEach(0..<( 7 - users.count ), id: \.self) { _ in
+								ForEach(0..<( MAX_USER_COUNT - users.count ), id: \.self) { _ in
 									Rectangle()
 										.fill(.gray)
 										.frame(height: 24)
@@ -160,7 +164,7 @@ struct WaitingRoomView: View {
 						Spacer(minLength: 24)
 
 						// オーナーのみスタートボタンが押せる
-						if gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId {
+						if isOwner, isEnableNextToScreen {
 							Button {
 								Task {
 									// 写真選択画面に遷移する
@@ -178,7 +182,7 @@ struct WaitingRoomView: View {
 							}
 
 						} else {
-							Text("オーナーの操作待ち")
+							Text(isEnableNextToScreen ? "オーナーの操作待ち" : "\(String(IS_ENABLE_STRAT_USER_COUNT))人からスタートできます")
 								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
@@ -215,7 +219,9 @@ struct WaitingRoomView_Previews: PreviewProvider {
 													 createdAt: nil)
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
 											GameUser(userId: "testUserId02", name: "テストNAME02"),
-											GameUser(userId: "testUserId03", name: "テストNAME03")]
+											GameUser(userId: "testUserId03", name: "テストNAME03"),
+											GameUser(userId: "testUserId04", name: "テストNAME04"),
+											GameUser(userId: "testUserId05", name: "テストNAME05")]
 	static private var roomId: String = "111112"
 
 	static var previews: some View {

@@ -1,18 +1,43 @@
-//
-//  PhotoSelectView.swift
-//  photo-werewolf-iOS
-//
-//  Created by 太田和希 on 2022/12/08.
-//
-
 import SwiftUI
+import FirebaseStorage
+import Kingfisher
 
 struct PhotoSelectView: View {
 	var gameRoom: GameRoom?
 	var users: [GameUser]
+	var viewModel: PhotoSelectViewModel
 
-	@State var image: UIImage?
-	@State var showingAlert: Bool = false
+	@State var isShowImagePicker: Bool = false
+	@State var selectedImage: UIImage?
+	@State private var isLoading = false
+
+	private func uploadImage() {
+		guard let roomId = gameRoom?.id else { return }
+		isLoading = true
+		FirestorageApiClient.shared.uploadStandardGameUserPhoto(roomId: roomId, selectedImage: selectedImage)
+		isLoading = false
+	}
+
+	private var own: GameUser? {
+		get {
+			guard let ownUserId = FirebaseAuthClient.shared.firestoreUser?.userId else { return nil }
+
+			for gameUser in users {
+				if gameUser.userId == ownUserId {
+					return gameUser
+				}
+			}
+			return nil
+		}
+	}
+
+	private var isOwner: Bool {
+		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
+	}
+
+	private var isEnableNextToScreen: Bool {
+		users.allSatisfy { $0.photoUrl != nil }
+	}
 
 	var body: some View {
 		ZStack {
@@ -33,18 +58,27 @@ struct PhotoSelectView: View {
 					.fontWeight(.black)
 
 				Button {
-					showingAlert = true
+					/// photoUrlが存在しない場合は画像選択する
+					if own?.photoUrl == nil {
+						isShowImagePicker = true
+					}
 				} label: {
-					if let image = image {
-						Image(uiImage: image)
-							.resizable()
-							.frame(width: 180, height: 240)
-					} else {
+					ZStack {
 						Image(systemName: "photo")
 							.font(.system(size: 32, design: .rounded))
 							.foregroundColor(Color.white)
 							.frame(width: 180, height: 240)
 							.background(Color(UIColor.lightGray))
+
+						if let photoUrl = own?.photoUrl, let url = URL(string: photoUrl) {
+							KFImage(url)
+								.resizable()
+								.frame(width: 180, height: 240)
+						} else {
+							if isLoading {
+								ProgressView()
+							}
+						}
 					}
 				}
 				.padding(.bottom, 16)
@@ -72,15 +106,16 @@ struct PhotoSelectView: View {
 
 								// usersから取得したユーザーの名前を表示する
 								ForEach(users) { user in
-
 									HStack {
-										Image(systemName: "checkmark.circle.fill")
-											.font(.system(size: 16))
-											.foregroundColor(.gray)
-
-//										Image(systemName: "checkmark.circle.fill")
-//											.font(.system(size: 24))
-//											.foregroundColor(.green)
+										if user.photoUrl != nil {
+											Image(systemName: "checkmark.circle.fill")
+												.font(.system(size: 16))
+												.foregroundColor(.green)
+										} else {
+											Image(systemName: "checkmark.circle.fill")
+													.font(.system(size: 16))
+													.foregroundColor(.gray)
+										}
 
 										Text("\(user.name)")
 											.font(.system(size: 16, design: .rounded))
@@ -95,16 +130,35 @@ struct PhotoSelectView: View {
 
 						Spacer(minLength: 24)
 
-						NavigationLink(destination: ConfirmationRollView()) {
-							Text("役職確認へ")
-								.font(.system(size: 24, design: .rounded))
+						// オーナーのみ次の画面に進むボタンが押せる
+						if isOwner, isEnableNextToScreen {
+							Button {
+								Task {
+									guard let roomId = gameRoom?.id else { return }
+									// 写真選択画面に遷移する
+									await viewModel.changeStatusToRollCheck(roomId: roomId)
+								}
+							} label: {
+								Text("役職確認へ")
+									.font(.system(size: 24, design: .rounded))
+									.foregroundColor(.white)
+									.fontWeight(.black)
+									.padding()
+									.accentColor(Color.white)
+									.background(Color.purple)
+									.cornerRadius(32)
+							}
+
+						} else {
+							Text(isEnableNextToScreen ? "オーナーの操作待ち" : "全員の写真選択待ち")
+								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
+								.padding()
+								.accentColor(Color.white)
+								.background(Color.gray)
+								.cornerRadius(32)
 						}
-						.padding()
-						.accentColor(Color.white)
-						.background(Color.purple)
-						.cornerRadius(32)
 
 						Spacer(minLength: 24)
 					}
@@ -112,65 +166,25 @@ struct PhotoSelectView: View {
 				}
 			}
 			.frame(width: 300)
-			.sheet(isPresented: $showingAlert) {
-			} content: {
-				ImagePicker(image: $image)
+			.sheet(isPresented: $isShowImagePicker, onDismiss: {uploadImage()}) {
+				ImagePicker(image: $selectedImage)
 			}
 		}
 	}
 }
+
+
+
+
 
 struct PhotoSelectView_Previews: PreviewProvider {
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
 											GameUser(userId: "testUserId02", name: "テストNAME02"),
-											GameUser(userId: "testUserId03", name: "テストNAME03")]
+											GameUser(userId: "testUserId03", name: "テストNAME03"),
+											GameUser(userId: "testUserId04", name: "テストNAME04"),
+											GameUser(userId: "testUserId05", name: "テストNAME05")]
 
 	static var previews: some View {
-		PhotoSelectView(users: users)
-	}
-}
-
-import PhotosUI
-
-struct ImagePicker: UIViewControllerRepresentable {
-	@Environment(\.presentationMode) var presentationMode
-	@Binding var image: UIImage?
-
-	func makeCoordinator() -> Coordinator {
-		Coordinator(self)
-	}
-
-	func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
-		var configuration = PHPickerConfiguration()
-		configuration.filter = .images
-		configuration.selectionLimit = 1
-		let picker = PHPickerViewController(configuration: configuration)
-		picker.delegate = context.coordinator
-		return picker
-	}
-
-	func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePicker>) {}
-
-	class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-		let parent: ImagePicker
-
-		init(_ parent: ImagePicker) {
-			self.parent = parent
-		}
-
-		func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-			parent.presentationMode.wrappedValue.dismiss()
-
-			if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-				itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
-					guard let image = image as? UIImage else {
-						return
-					}
-					DispatchQueue.main.sync {
-						self?.parent.image = image
-					}
-				}
-			}
-		}
+		PhotoSelectView(users: users, viewModel: PhotoSelectViewModel())
 	}
 }
