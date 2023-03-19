@@ -178,6 +178,12 @@ struct PhotoSelectView: View {
 
 
 struct PhotoSelectView_Previews: PreviewProvider {
+	static private var gameRoom: GameRoom = GameRoom(owner: GameUser(userId: "testUserId01", name: "テストNAME01"),
+													 roomName: "テストルーム",
+													 status: .photoSelect,
+													 gameType: .standard,
+													 createdAt: nil)
+
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
 											GameUser(userId: "testUserId02", name: "テストNAME02"),
 											GameUser(userId: "testUserId03", name: "テストNAME03"),
@@ -185,6 +191,6 @@ struct PhotoSelectView_Previews: PreviewProvider {
 											GameUser(userId: "testUserId05", name: "テストNAME05")]
 
 	static var previews: some View {
-		PhotoSelectView(users: users, viewModel: PhotoSelectViewModel())
+		PhotoSelectView(gameRoom: gameRoom, users: users, viewModel: PhotoSelectViewModel())
 	}
 }
