@@ -21,4 +21,6 @@ struct GameUser: Codable, Identifiable {
 	var userId: String
 	var name: String
 	var photoUrl: String?
+	var roll: GameRoll?
 }
+

@@ -20,3 +20,8 @@ enum RoomStatus: String, Codable {
 	case result
 	case done
 }
+
+enum GameRoll: String, Codable{
+	case villager
+	case wereWolf
+}
