@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 /* eslint-disable max-len */
-export const assignRoles = functions.region("asia-northeast1").https.onCall(async (data, _context) => {
+export const standardGameAssignRoles = functions.region("asia-northeast1").https.onCall(async (data, _context) => {
   const gameRoomId = data.gameRoomId;
 
   if (!gameRoomId) {
