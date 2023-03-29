@@ -17,8 +17,8 @@ struct StandardGameView: View {
 			WaitingRoomView(viewModel: WaitingRoomViewModel(), gameRoom: viewModel.gameRoom, users: viewModel.users, roomId: viewModel.roomId)
 		case .photoSelect:
 			PhotoSelectView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: PhotoSelectViewModel())
-		case .checkRoll:
-			CheckRollView()
+		case .checkRole:
+			CheckRoleView()
 		case .conversation:
 			EmptyView()
 		case .vote:
