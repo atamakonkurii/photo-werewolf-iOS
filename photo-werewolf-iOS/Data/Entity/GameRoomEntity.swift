@@ -12,7 +12,7 @@ struct GameRoom: Codable {
 	@DocumentID var id: String?
 	var owner: GameUser
 	var roomName: String
-	var status: RoomStatus
+	var status: StandardGameRoomStatus
 	var gameType: GameType
 	@ServerTimestamp var createdAt: Timestamp?
 }
