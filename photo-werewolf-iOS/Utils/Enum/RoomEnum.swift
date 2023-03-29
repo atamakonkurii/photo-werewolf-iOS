@@ -11,7 +11,7 @@ enum GameType: String, Codable {
 	case standard
 }
 
-enum RoomStatus: String, Codable {
+enum StandardGameRoomStatus: String, Codable {
 	case waiting
 	case photoSelect
 	case checkRole
@@ -21,7 +21,7 @@ enum RoomStatus: String, Codable {
 	case done
 }
 
-enum GameRole: String, Codable{
+enum StandardGameRole: String, Codable{
 	case villager
 	case werewolf
 }

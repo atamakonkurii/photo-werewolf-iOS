@@ -55,7 +55,7 @@ extension FirestoreApiClient {
 		let docRef = db.collection("rooms").document(roomId)
 		let gameRoom = GameRoom(owner: gameUser,
 								roomName: roomName,
-								status: RoomStatus.waiting,
+								status: StandardGameRoomStatus.waiting,
 								gameType: gameType,
 								createdAt: Timestamp())
 		do {
@@ -68,7 +68,7 @@ extension FirestoreApiClient {
 		}
 	}
 
-	func updateStatusGameRoom(roomId: String, status: RoomStatus) async {
+	func updateStatusGameRoom(roomId: String, status: StandardGameRoomStatus) async {
 		let docRef = db.collection("rooms").document(roomId)
 
 		do {

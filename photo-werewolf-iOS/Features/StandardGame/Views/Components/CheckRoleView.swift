@@ -8,7 +8,33 @@
 import SwiftUI
 
 struct CheckRoleView: View {
+	var gameRoom: GameRoom?
+	var users: [GameUser]
+	var viewModel: CheckRoleViewModel
+
 	@State var showingPopUp = false
+
+	private var own: GameUser? {
+		get {
+			guard let ownUserId = FirebaseAuthClient.shared.firestoreUser?.userId else { return nil }
+
+			for gameUser in users {
+				if gameUser.userId == ownUserId {
+					return gameUser
+				}
+			}
+			return nil
+		}
+	}
+
+	private var isOwner: Bool {
+		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
+	}
+
+	private var isEnableNextToScreen: Bool {
+		users.allSatisfy { $0.photoUrl != nil }
+	}
+
     var body: some View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
@@ -22,21 +48,6 @@ struct CheckRoleView: View {
 					.fontWeight(.black)
 					.padding(.bottom, 16)
 
-				Button(action: {
-					withAnimation {
-						showingPopUp = true
-					}
-				}, label: {
-					Text("確認する")
-						.font(.system(size: 24, design: .rounded))
-						.foregroundColor(.white)
-						.fontWeight(.black)
-				})
-				.padding()
-				.accentColor(Color.white)
-				.background(Color.purple)
-				.cornerRadius(32)
-				.padding(.bottom, 16)
 
 				ZStack {
 					Rectangle()
@@ -48,6 +59,22 @@ struct CheckRoleView: View {
 						)
 
 					VStack {
+						Button(action: {
+							withAnimation {
+								showingPopUp = true
+							}
+						}, label: {
+							Text("あなたの\n役職確認")
+								.font(.system(size: 24, design: .rounded))
+								.foregroundColor(.white)
+								.fontWeight(.black)
+						})
+						.padding()
+						.accentColor(Color.white)
+						.background(Color.purple)
+						.cornerRadius(32)
+						.padding(.bottom, 16)
+
 						Group {
 							Text("参加者")
 								.font(.system(size: 32, design: .rounded))
@@ -56,74 +83,60 @@ struct CheckRoleView: View {
 								.padding(.bottom, 8)
 
 							VStack(alignment: .leading, spacing: 12) {
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
 
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
+								// usersから取得したユーザーの名前を表示する
+								ForEach(users) { user in
+									HStack {
+										if user.photoUrl != nil {
+											Image(systemName: "checkmark.circle.fill")
+												.font(.system(size: 24))
+												.foregroundColor(.green)
+										} else {
+											Image(systemName: "checkmark.circle.fill")
+												.font(.system(size: 24))
+												.foregroundColor(.gray)
+										}
 
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.green)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
-
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.green)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
-
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
-								}
-
-								HStack {
-									Image(systemName: "checkmark.circle.fill")
-										.font(.system(size: 24))
-										.foregroundColor(.gray)
-
-									Text("かずお")
-										.font(.system(size: 24, design: .rounded))
-										.foregroundColor(.white)
-										.fontWeight(.black)
+										Text("\(user.name)")
+											.font(.system(size: 24, design: .rounded))
+											.foregroundColor(.white)
+											.fontWeight(.black)
+											.lineLimit(1)
+									}
 								}
 							}
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
 
-						NavigationLink(destination: EmptyView()) {
-							Text("話し合いへ")
-								.font(.system(size: 24, design: .rounded))
+						// オーナーのみ次の画面に進むボタンが押せる
+						if isOwner, isEnableNextToScreen {
+							Button {
+								Task {
+									guard let roomId = gameRoom?.id else { return }
+									// 話し合い画面に遷移する
+									await viewModel.changeStatusToConversation(roomId: roomId)
+								}
+							} label: {
+								Text("役職確認へ")
+									.font(.system(size: 24, design: .rounded))
+									.foregroundColor(.white)
+									.fontWeight(.black)
+									.padding()
+									.accentColor(Color.white)
+									.background(Color.purple)
+									.cornerRadius(32)
+							}
+
+						} else {
+							Text(isEnableNextToScreen ? "オーナーの操作待ち" : "全員の役職確認待ち")
+								.font(.system(size: 16, design: .rounded))
 								.foregroundColor(.white)
 								.fontWeight(.black)
+								.padding()
+								.accentColor(Color.white)
+								.background(Color.gray)
+								.cornerRadius(32)
 						}
-						.padding()
-						.accentColor(Color.white)
-						.background(Color.purple)
-						.cornerRadius(32)
 					}
 					.frame(width: 180)
 				}
@@ -139,6 +152,8 @@ struct CheckRoleView: View {
 
 struct ConfirmationRoolPopupView: View {
 	@Binding var isPresent: Bool
+
+
 	var body: some View {
 		ZStack {
 			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
@@ -174,7 +189,19 @@ struct ConfirmationRoolPopupView: View {
 }
 
 struct ConfirmationRoleView_Previews: PreviewProvider {
+	static private var gameRoom: GameRoom = GameRoom(owner: GameUser(userId: "testUserId01", name: "テストNAME01"),
+													 roomName: "テストルーム",
+													 status: .checkRole,
+													 gameType: .standard,
+													 createdAt: nil)
+
+	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
+											GameUser(userId: "testUserId02", name: "テストNAME02"),
+											GameUser(userId: "testUserId03", name: "テストNAME03"),
+											GameUser(userId: "testUserId04", name: "テストNAME04"),
+											GameUser(userId: "testUserId05", name: "テストNAME05")]
+
     static var previews: some View {
-		CheckRoleView()
+		CheckRoleView(gameRoom: gameRoom, users: users, viewModel: CheckRoleViewModel())
     }
 }
