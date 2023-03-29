@@ -136,7 +136,7 @@ struct PhotoSelectView: View {
 								Task {
 									guard let roomId = gameRoom?.id else { return }
 									// 写真選択画面に遷移する
-									await viewModel.changeStatusToRollCheck(roomId: roomId)
+									await viewModel.changeStatusToRoleCheck(roomId: roomId)
 								}
 							} label: {
 								Text("役職確認へ")

@@ -1,45 +1,52 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+admin.initializeApp();
 
-// https://asia-northeast1-photo-werewolf.cloudfunctions.net/helloWorldTokyo
+const db = admin.firestore();
 /* eslint-disable max-len */
-export const helloWorldTokyo = functions.region("asia-northeast1").https.onRequest((request, response) => {
-  /* eslint-enable max-len */
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Tokyo!");
-});
+export const assignRoles = functions.region("asia-northeast1").https.onCall(async (data, _context) => {
+  const gameRoomId = data.gameRoomId;
 
-// GameRollの割り振りを行う
-export const assignGameRoll = functions.region("asia-northeast1").https.onCall(async (data, context) => {
-  const db = admin.firestore();
-  const gameRef = db.collection("games").doc(data.gameId);
-  const gameDoc = await gameRef.get();
-  const gameData = gameDoc.data();
-  if (gameData === undefined) {
-    throw new Error("Game not found");
+  if (!gameRoomId) {
+    throw new functions.https.HttpsError("invalid-argument", "gameRoomId is required.");
   }
-  const players = gameData.players;
-  const playerIds = Object.keys(players);
-  const playerNum = playerIds.length;
-  const gameRolls = gameData.gameRolls;
-  const gameRollIds = Object.keys(gameRolls);
-  const gameRollNum = gameRollIds.length;
-  if (playerNum !== gameRollNum) {
-    throw new Error("PlayerNum and GameRollNum are not equal");
+
+  const gameUsersSnapshot = await db.collection(`rooms/${gameRoomId}/gameUsers`).get();
+
+  type GameUser = {
+    id: string;
+    roll: string | null;
+  }[];
+  const gameUsers: GameUser = gameUsersSnapshot.docs.map((doc) => ({id: doc.id, roll: null, ...doc.data()}));
+
+  if (gameUsers.length < 3) {
+    throw new functions.https.HttpsError("failed-precondition", "At least 3 players are required.");
   }
-  const gameRollsShuffled = shuffle(gameRollIds);
-  const gameRollsAssigned = {};
-  for (let i = 0; i < playerNum; i++) {
-    gameRollsAssigned[playerIds[i]] = gameRollsShuffled[i];
+
+  // Shuffle gameUsers array
+  for (let i = gameUsers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [gameUsers[i], gameUsers[j]] = [gameUsers[j], gameUsers[i]];
   }
-  await gameRef.update({
-    gameRollsAssigned,
+
+  // Assign roles
+  const werewolfCount = 2;
+  for (let i = 0; i < gameUsers.length; i++) {
+    gameUsers[i].roll = i < werewolfCount ? "werewolf" : "villager";
+  }
+
+  // Update Firestore
+  const batch = db.batch();
+
+  gameUsers.forEach((user) => {
+    const userRef = db.doc(`rooms/${gameRoomId}/gameUsers/${user.id}`);
+    batch.update(userRef, {roll: user.roll});
   });
-  return {
-    gameRollsAssigned,
-  };
+
+  await batch.commit();
+
+  return {message: "Roles assigned successfully"};
 });
+/* eslint-enable max-len */
 

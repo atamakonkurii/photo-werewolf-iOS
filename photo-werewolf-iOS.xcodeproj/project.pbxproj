@@ -23,6 +23,7 @@
 		D527CD0229BFDC1D0097D58F /* StandardGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527CD0129BFDC1D0097D58F /* StandardGameModel.swift */; };
 		D536625029AD598F0048B01F /* FetchStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536624F29AD598F0048B01F /* FetchStateEnum.swift */; };
 		D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D536625129AD63FC0048B01F /* FirestoreApiClient.swift */; };
+		D53E115729D3AAD400863D0C /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D53E115629D3AAD400863D0C /* FirebaseFunctions */; };
 		D548C15729C34E6900BFC84E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D548C15629C34E6900BFC84E /* FirebaseStorage */; };
 		D548C15929C3570900BFC84E /* FirestoreGameRoomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D548C15829C3570900BFC84E /* FirestoreGameRoomUser.swift */; };
 		D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */; };
@@ -40,7 +41,7 @@
 		D5AD9ACF29C286D600984A16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D5AD9ACE29C286D600984A16 /* Kingfisher */; };
 		D5C17CF62940AFF600BE6DF5 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */; };
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
-		D5C9B39729421AA40053DF89 /* CheckRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* CheckRollView.swift */; };
+		D5C9B39729421AA40053DF89 /* CheckRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* CheckRoleView.swift */; };
 		D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */; };
 		D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */; };
 		D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */; };
@@ -77,7 +78,7 @@
 		D5AD9ACB29C283C300984A16 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
-		D5C9B39629421AA40053DF89 /* CheckRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRollView.swift; sourceTree = "<group>"; };
+		D5C9B39629421AA40053DF89 /* CheckRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoleView.swift; sourceTree = "<group>"; };
 		D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEnum.swift; sourceTree = "<group>"; };
 		D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Features/Home/Models/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -93,6 +94,7 @@
 				D5AD9ACF29C286D600984A16 /* Kingfisher in Frameworks */,
 				D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */,
 				D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */,
+				D53E115729D3AAD400863D0C /* FirebaseFunctions in Frameworks */,
 				D50244A229476903005B3282 /* FirebaseFirestore in Frameworks */,
 				D548C15729C34E6900BFC84E /* FirebaseStorage in Frameworks */,
 				D502449C29476903005B3282 /* FirebaseAnalytics in Frameworks */,
@@ -125,7 +127,7 @@
 			children = (
 				D5C17CF52940AFF600BE6DF5 /* WaitingRoomView.swift */,
 				D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */,
-				D5C9B39629421AA40053DF89 /* CheckRollView.swift */,
+				D5C9B39629421AA40053DF89 /* CheckRoleView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -375,6 +377,7 @@
 				D54B884529A7A4CC00D695A3 /* FirebaseFirestoreSwift */,
 				D5AD9ACE29C286D600984A16 /* Kingfisher */,
 				D548C15629C34E6900BFC84E /* FirebaseStorage */,
+				D53E115629D3AAD400863D0C /* FirebaseFunctions */,
 			);
 			productName = "photo-werewolf-iOS";
 			productReference = D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */;
@@ -463,7 +466,7 @@
 				D5AD9ACA29C282D500984A16 /* ImagePicker.swift in Sources */,
 				D50963D9299D067500D1CD8D /* MakeRoomPopupViewModel.swift in Sources */,
 				D524617729C3C6B100454EE6 /* FirestorageStandardGame.swift in Sources */,
-				D5C9B39729421AA40053DF89 /* CheckRollView.swift in Sources */,
+				D5C9B39729421AA40053DF89 /* CheckRoleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,6 +715,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		D53E115629D3AAD400863D0C /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 		D548C15629C34E6900BFC84E /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

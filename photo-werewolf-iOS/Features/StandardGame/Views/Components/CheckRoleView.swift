@@ -1,5 +1,5 @@
 //
-//  ConfirmationRollView.swift
+//  ConfirmationRoleView.swift
 //  photo-werewolf-iOS
 //
 //  Created by 太田和希 on 2022/12/08.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CheckRollView: View {
+struct CheckRoleView: View {
 	@State var showingPopUp = false
     var body: some View {
 		ZStack {
@@ -173,8 +173,8 @@ struct ConfirmationRoolPopupView: View {
 	}
 }
 
-struct ConfirmationRollView_Previews: PreviewProvider {
+struct ConfirmationRoleView_Previews: PreviewProvider {
     static var previews: some View {
-		CheckRollView()
+		CheckRoleView()
     }
 }
