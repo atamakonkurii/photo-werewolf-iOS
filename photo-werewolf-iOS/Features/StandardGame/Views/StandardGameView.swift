@@ -1,10 +1,3 @@
-//
-//  StandardGameView.swift
-//  photo-werewolf-iOS
-//
-//  Created by 太田和希 on 2023/03/14.
-//
-
 import SwiftUI
 
 struct StandardGameView: View {
@@ -20,7 +13,7 @@ struct StandardGameView: View {
 		case .checkRole:
 			CheckRoleView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: CheckRoleViewModel())
 		case .conversation:
-			EmptyView()
+			ConversationView(gameRoom: viewModel.gameRoom, users: viewModel.users)
 		case .vote:
 			EmptyView()
 		case .result:
