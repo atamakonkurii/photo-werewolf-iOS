@@ -21,8 +21,8 @@ struct ConversationView: View {
 					HStack {
 						ForEach(users) { user in
 							VStack {
-								if let photoUrl = user.photoUrl {
-									KFImage(URL(string: photoUrl))
+								if let exchangePhotoUrl = user.exchangePhotoUrl {
+									KFImage(URL(string: exchangePhotoUrl))
 										.resizable()
 										.scaledToFit()
 										.frame(width: 180, height: 240)
