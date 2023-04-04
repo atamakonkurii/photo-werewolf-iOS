@@ -1,10 +1,3 @@
-//
-//  ConfirmationRoleView.swift
-//  photo-werewolf-iOS
-//
-//  Created by 太田和希 on 2022/12/08.
-//
-
 import SwiftUI
 
 struct CheckRoleView: View {
