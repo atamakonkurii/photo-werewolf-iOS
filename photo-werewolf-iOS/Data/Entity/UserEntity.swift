@@ -23,6 +23,6 @@ struct GameUser: Codable, Identifiable {
 	var photoUrl: String?
 	var exchangePhotoUrl: String?
 	var role: StandardGameRole?
-	var voteToUserId: String?
+	var voteToUser: User?
 }
 

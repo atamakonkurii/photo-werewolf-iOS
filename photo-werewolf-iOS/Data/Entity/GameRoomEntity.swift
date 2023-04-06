@@ -14,5 +14,6 @@ struct GameRoom: Codable {
 	var roomName: String
 	var status: StandardGameRoomStatus
 	var gameType: GameType
+	var winningTeam: StandardGameRole?
 	@ServerTimestamp var createdAt: Timestamp?
 }

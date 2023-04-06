@@ -52,4 +52,17 @@ extension FirestoreApiClient {
 			print(error)
 		}
 	}
+
+	func updateVoteToUser(roomId: String, voteToUser: User) async {
+		guard let user = FirebaseAuthClient.shared.firestoreUser else { return }
+		guard let userId = user.id  else { return }
+
+		let docRef = db.collection("rooms").document(roomId)
+
+		do {
+			try await docRef.collection("gameUsers").document(userId).updateData(["voteToUser": voteToUser])
+		} catch {
+			print(error)
+		}
+	}
 }

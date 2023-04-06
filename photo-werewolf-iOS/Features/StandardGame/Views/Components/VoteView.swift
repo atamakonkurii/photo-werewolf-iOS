@@ -6,6 +6,22 @@ struct VoteView: View {
 	var users: [GameUser]
 	var viewModel: VoteViewModel
 
+	@State var showingPopUp = false
+	@State var voteToUser: User = User(userId: "", name: "")
+
+	private var own: GameUser? {
+		get {
+			guard let ownUserId = FirebaseAuthClient.shared.firestoreUser?.userId else { return nil }
+
+			for gameUser in users {
+				if gameUser.userId == ownUserId {
+					return gameUser
+				}
+			}
+			return nil
+		}
+	}
+
 	private var isOwner: Bool {
 		gameRoom?.owner.userId == FirebaseAuthClient.shared.firestoreUser?.userId
 	}
@@ -38,7 +54,11 @@ struct VoteView: View {
 							VStack {
 								if let exchangePhotoUrl = user.exchangePhotoUrl {
 									Button(action: {
-										// この人に投票する
+										// 自分以外に投票する
+										if own?.userId != user.userId {
+											voteToUser = User(userId: user.userId, name: user.name)
+											showingPopUp = true
+										}
 									}){
 										KFImage(URL(string: exchangePhotoUrl))
 											.resizable()
@@ -88,7 +108,7 @@ struct VoteView: View {
 					Button {
 						Task {
 							guard let roomId = gameRoom?.id else { return }
-							// 写真選択画面に遷移する
+							// 結果確認画面に遷移する
 							await viewModel.changeStatusToResult(roomId: roomId)
 						}
 					} label: {
@@ -113,6 +133,68 @@ struct VoteView: View {
 						.cornerRadius(32)
 				}
 			}
+
+			if showingPopUp {
+				VotePopupView(isPresent: $showingPopUp, roomId: gameRoom?.id ?? "", voteToUser: voteToUser, viewModel: viewModel)
+			}
+		}
+	}
+}
+
+struct VotePopupView: View {
+	@Binding var isPresent: Bool
+	var roomId: String
+	var voteToUser: User
+	var viewModel: VoteViewModel
+
+	var body: some View {
+		ZStack {
+			Color(red: 0.34, green: 0.4, blue: 0.49, opacity: 0.5)
+				.ignoresSafeArea()
+			VStack {
+				Button(action: {
+					withAnimation {
+						isPresent = false
+					}
+				}, label: {
+					HStack {
+						Spacer()
+
+						Image(systemName: "multiply.circle.fill")
+							.font(.system(size: 30))
+							.foregroundColor(.gray)
+					}
+				})
+
+				Text("\(voteToUser.name)に投票しますか？")
+					.font(.system(size: 24, design: .rounded))
+					.foregroundColor(.white)
+					.fontWeight(.black)
+
+
+				Button(action: {
+					withAnimation {
+						Task {
+							await FirestoreApiClient.shared.updateVoteToUser(roomId: roomId, voteToUser: voteToUser)
+							isPresent = false
+						}
+					}
+				}, label: {
+					Text("投票する")
+						.font(.system(size: 24, design: .rounded))
+						.foregroundColor(.white)
+						.fontWeight(.black)
+				})
+				.padding()
+				.accentColor(Color.white)
+				.background(Color.purple)
+				.cornerRadius(32)
+				.padding(.bottom, 16)
+			}
+			.frame(width: 280, alignment: .center)
+			.padding()
+			.background(Color(red: 0.133, green: 0.157, blue: 0.192))
+			.cornerRadius(36)
 		}
 	}
 }
@@ -124,13 +206,14 @@ struct VoteView_Previews: PreviewProvider {
 													 gameType: .standard,
 													 createdAt: nil)
 
-	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01",exchangePhotoUrl: "https://placehold.jp/80x80.png"),
-											GameUser(userId: "testUserId02", name: "テストNAME02",exchangePhotoUrl: "https://placehold.jp/100x100.png"),
+	static private var users: [GameUser] = [GameUser(userId: "testUserId02", name: "テストNAME02",exchangePhotoUrl: "https://placehold.jp/100x100.png"),
+											GameUser(userId: "testUserId01", name: "テストNAME01",exchangePhotoUrl: "https://placehold.jp/80x80.png"),
+
 											GameUser(userId: "testUserId03", name: "テストNAME03",exchangePhotoUrl: "https://placehold.jp/120x120.png"),
 											GameUser(userId: "testUserId04", name: "テストNAME04",exchangePhotoUrl: "https://placehold.jp/150x150.png"),
 											GameUser(userId: "testUserId05", name: "テストNAME05",exchangePhotoUrl: "https://placehold.jp/400x400.png")]
 
     static var previews: some View {
-        VoteView(gameRoom: gameRoom, users: users, viewModel: VoteViewModel())
+		VoteView(gameRoom: gameRoom, users: users, viewModel: VoteViewModel())
     }
 }

@@ -121,12 +121,12 @@ struct CheckRoleView: View {
 			}
 
 			if showingPopUp {
-				ConfirmationRoolPopupView(isPresent: $showingPopUp, gameRole: own?.role)
+				ConfirmationRolePopupView(isPresent: $showingPopUp, gameRole: own?.role)
 			}
 		}
 	}
 
-	struct ConfirmationRoolPopupView: View {
+	struct ConfirmationRolePopupView: View {
 		@Binding var isPresent: Bool
 		var gameRole :StandardGameRole?
 
