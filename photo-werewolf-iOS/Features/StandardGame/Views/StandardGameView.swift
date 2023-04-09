@@ -13,9 +13,9 @@ struct StandardGameView: View {
 		case .checkRole:
 			CheckRoleView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: CheckRoleViewModel())
 		case .conversation:
-			ConversationView(gameRoom: viewModel.gameRoom, users: viewModel.users)
+			ConversationView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: ConversationViewModel())
 		case .vote:
-			EmptyView()
+			VoteView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: VoteViewModel())
 		case .result:
 			EmptyView()
 		default:
