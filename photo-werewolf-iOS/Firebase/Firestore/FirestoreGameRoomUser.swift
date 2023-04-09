@@ -60,7 +60,12 @@ extension FirestoreApiClient {
 		let docRef = db.collection("rooms").document(roomId)
 
 		do {
-			try await docRef.collection("gameUsers").document(userId).updateData(["voteToUser": voteToUser])
+			try await docRef.collection("gameUsers").document(userId).updateData([
+				"voteToUser":[
+					"userId": "\(voteToUser.userId)",
+					"name": "\(voteToUser.name)"
+					]
+			])
 		} catch {
 			print(error)
 		}

@@ -22,7 +22,7 @@ struct ConversationView: View {
 					.fontWeight(.black)
 					.padding(.bottom, 16)
 
-				ScrollView(.horizontal) {
+				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(users) { user in
 							VStack {
@@ -30,7 +30,8 @@ struct ConversationView: View {
 									KFImage(URL(string: exchangePhotoUrl))
 										.resizable()
 										.scaledToFit()
-										.frame(width: 180, height: 240)
+										.frame(width: UIScreen.main.bounds.size.width - 40,
+											   height: 320)
 								}
 
 								Text("\(user.name)")

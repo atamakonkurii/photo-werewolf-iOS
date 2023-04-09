@@ -27,7 +27,7 @@ struct VoteView: View {
 	}
 
 	private var isEnableNextToScreen: Bool {
-		users.allSatisfy { $0.photoUrl != nil }
+		users.allSatisfy { $0.voteToUser != nil }
 	}
 
 	var body: some View {
@@ -84,7 +84,7 @@ struct VoteView: View {
 					// usersから取得したユーザーの名前を表示する
 					ForEach(users) { user in
 						HStack {
-							if user.photoUrl != nil {
+							if user.voteToUser != nil {
 								Image(systemName: "checkmark.circle.fill")
 									.font(.system(size: 16))
 									.foregroundColor(.green)
@@ -173,11 +173,9 @@ struct VotePopupView: View {
 
 
 				Button(action: {
-					withAnimation {
-						Task {
-							await FirestoreApiClient.shared.updateVoteToUser(roomId: roomId, voteToUser: voteToUser)
-							isPresent = false
-						}
+					Task {
+						await FirestoreApiClient.shared.updateVoteToUser(roomId: roomId, voteToUser: voteToUser)
+						isPresent = false
 					}
 				}, label: {
 					Text("投票する")
