@@ -21,7 +21,12 @@ enum StandardGameRoomStatus: String, Codable {
 	case done
 }
 
-enum StandardGameRole: String, Codable{
+enum StandardGameRole: String, Codable {
 	case villager
 	case werewolf
+}
+
+enum GameResult: String, Codable {
+	case win
+	case lose
 }

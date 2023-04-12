@@ -17,7 +17,7 @@ struct StandardGameView: View {
 		case .vote:
 			VoteView(gameRoom: viewModel.gameRoom, users: viewModel.users, viewModel: VoteViewModel())
 		case .result:
-			EmptyView()
+			ResultView(gameRoom: viewModel.gameRoom, users: viewModel.users)
 		default:
 			EmptyView()
 		}

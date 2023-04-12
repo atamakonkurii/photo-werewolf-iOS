@@ -24,5 +24,6 @@ struct GameUser: Codable, Identifiable {
 	var exchangePhotoUrl: String?
 	var role: StandardGameRole?
 	var voteToUser: User?
+	var result: GameResult?
 }
 
