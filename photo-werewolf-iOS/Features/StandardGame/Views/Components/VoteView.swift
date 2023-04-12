@@ -7,7 +7,7 @@ struct VoteView: View {
 	var viewModel: VoteViewModel
 
 	@State var showingPopUp = false
-	@State var voteToUser: User = User(userId: "", name: "")
+	@State var voteToUser: VoteToUser = VoteToUser(userId: "", name: "", role: .villager)
 
 	private var own: GameUser? {
 		get {
@@ -56,7 +56,7 @@ struct VoteView: View {
 									Button(action: {
 										// 自分以外に投票する
 										if own?.userId != user.userId {
-											voteToUser = User(userId: user.userId, name: user.name)
+											voteToUser = VoteToUser(userId: user.userId, name: user.name, role: user.role!)
 											showingPopUp = true
 										}
 									}){
@@ -144,7 +144,7 @@ struct VoteView: View {
 struct VotePopupView: View {
 	@Binding var isPresent: Bool
 	var roomId: String
-	var voteToUser: User
+	var voteToUser: VoteToUser
 	var viewModel: VoteViewModel
 
 	var body: some View {

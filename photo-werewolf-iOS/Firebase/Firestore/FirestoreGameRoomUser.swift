@@ -53,7 +53,7 @@ extension FirestoreApiClient {
 		}
 	}
 
-	func updateVoteToUser(roomId: String, voteToUser: User) async {
+	func updateVoteToUser(roomId: String, voteToUser: VoteToUser) async {
 		guard let user = FirebaseAuthClient.shared.firestoreUser else { return }
 		guard let userId = user.id  else { return }
 
@@ -63,7 +63,8 @@ extension FirestoreApiClient {
 			try await docRef.collection("gameUsers").document(userId).updateData([
 				"voteToUser":[
 					"userId": "\(voteToUser.userId)",
-					"name": "\(voteToUser.name)"
+					"name": "\(voteToUser.name)",
+					"role": "\(voteToUser.role)"
 					]
 			])
 		} catch {

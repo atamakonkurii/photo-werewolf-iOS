@@ -23,7 +23,14 @@ struct GameUser: Codable, Identifiable {
 	var photoUrl: String?
 	var exchangePhotoUrl: String?
 	var role: StandardGameRole?
-	var voteToUser: User?
+	var voteToUser: VoteToUser?
 	var result: GameResult?
+}
+
+struct VoteToUser: Codable, Identifiable {
+	@DocumentID var id: String?
+	var userId: String
+	var name: String
+	var role: StandardGameRole
 }
 
