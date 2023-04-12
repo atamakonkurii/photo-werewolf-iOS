@@ -47,7 +47,7 @@
 		D5C17CF82940F11C00BE6DF5 /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */; };
 		D5C6C65629D5004C0054A11E /* CheckRoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C6C65529D5004C0054A11E /* CheckRoleViewModel.swift */; };
 		D5C9B39729421AA40053DF89 /* CheckRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9B39629421AA40053DF89 /* CheckRoleView.swift */; };
-		D5C9CD8E29E6191A00B446FE /* VoteView copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9CD8D29E6191900B446FE /* VoteView copy.swift */; };
+		D5C9CD8E29E6191A00B446FE /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C9CD8D29E6191900B446FE /* ResultView.swift */; };
 		D5D43DEC29A428BF005C5C10 /* RoomEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */; };
 		D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */; };
 		D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */; };
@@ -90,7 +90,7 @@
 		D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
 		D5C6C65529D5004C0054A11E /* CheckRoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoleViewModel.swift; sourceTree = "<group>"; };
 		D5C9B39629421AA40053DF89 /* CheckRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoleView.swift; sourceTree = "<group>"; };
-		D5C9CD8D29E6191900B446FE /* VoteView copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoteView copy.swift"; sourceTree = "<group>"; };
+		D5C9CD8D29E6191900B446FE /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		D5D43DEB29A428BF005C5C10 /* RoomEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEnum.swift; sourceTree = "<group>"; };
 		D5D4E5D4299EF1A500F9B1EE /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		D5D4E5D6299EF1D800F9B1EE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "photo-werewolf-iOS/Features/Home/Models/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -141,7 +141,7 @@
 				D5C17CF72940F11C00BE6DF5 /* PhotoSelectView.swift */,
 				D5C9B39629421AA40053DF89 /* CheckRoleView.swift */,
 				D5990E5A29D5D2AE00C099E7 /* ConversationView.swift */,
-				D5C9CD8D29E6191900B446FE /* VoteView copy.swift */,
+				D5C9CD8D29E6191900B446FE /* ResultView.swift */,
 				D5688BF529DE2A910026A52F /* VoteView.swift */,
 			);
 			path = Components;
@@ -481,7 +481,7 @@
 				D50963DB299D06EB00D1CD8D /* MakeRoomModel.swift in Sources */,
 				D5D4E5D7299EF1D800F9B1EE /* HomeViewModel.swift in Sources */,
 				D5DE27F829B011B900440C27 /* FIrestoreGameRoom.swift in Sources */,
-				D5C9CD8E29E6191A00B446FE /* VoteView copy.swift in Sources */,
+				D5C9CD8E29E6191A00B446FE /* ResultView.swift in Sources */,
 				D536625229AD63FC0048B01F /* FirestoreApiClient.swift in Sources */,
 				D5D4E5D5299EF1A500F9B1EE /* HomeModel.swift in Sources */,
 				D5688BF829DE37B40026A52F /* ConversationViewModel.swift in Sources */,
@@ -706,7 +706,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 10.5.0;
+				minimumVersion = 10.8.0;
 			};
 		};
 		D5AD9ACD29C286D600984A16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
