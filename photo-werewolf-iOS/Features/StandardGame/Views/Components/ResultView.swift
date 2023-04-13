@@ -18,6 +18,7 @@ struct ResultView: View {
 					.fontWeight(.black)
 					.padding(.bottom, 8)
 
+
 				ForEach(users) { user in
 					HStack {
 						if user.role == .werewolf {

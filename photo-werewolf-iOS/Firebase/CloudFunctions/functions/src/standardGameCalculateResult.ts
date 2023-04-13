@@ -65,18 +65,22 @@ export const standardGameCalculateResult = functions.region("asia-northeast1").h
 
   const gameUsers: GameUser = gameUsersSnapshot.docs.map((doc) => ({id: doc.id, userId: doc.data().userId, role: doc.data().role, photoUrl: doc.data().photoUrl, exchangePhotoUrl: doc.data().exchangePhotoUrl, voteToUser: {userId: doc.data().voteToUser.userId, name: doc.data().voteToUser.name, role: doc.data().voteToUser.role}, result: null, ...doc.data()}));
 
+  console.log("gameUsers", gameUsers);
+
   if (gameUsers.length < 3) {
     throw new functions.https.HttpsError("failed-precondition", "At least 3 players are required.");
   }
 
   const updatedGameUsers = calculateGameResults(gameUsers);
 
+  console.log("updatedGameUsers", updatedGameUsers);
+
   // Update Firestore
   const batch = db.batch();
 
   updatedGameUsers.forEach((user) => {
     const userRef = db.doc(`rooms/${gameRoomId}/gameUsers/${user.id}`);
-    batch.update(userRef, {role: user.role});
+    batch.update(userRef, {result: user.result});
   });
 
   await batch.commit();

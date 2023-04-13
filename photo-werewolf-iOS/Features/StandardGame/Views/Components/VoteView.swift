@@ -48,7 +48,7 @@ struct VoteView: View {
 					.fontWeight(.black)
 					.padding(.bottom, 16)
 
-				ScrollView(.horizontal) {
+				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(users) { user in
 							VStack {
