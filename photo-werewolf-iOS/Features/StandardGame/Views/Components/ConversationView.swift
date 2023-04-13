@@ -55,7 +55,7 @@ struct ConversationView: View {
 							await viewModel.changeStatusToVote(roomId: roomId)
 						}
 					} label: {
-						Text("役職確認へ")
+						Text("投票へ")
 							.font(.system(size: 24, design: .rounded))
 							.foregroundColor(.white)
 							.fontWeight(.black)

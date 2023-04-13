@@ -18,14 +18,14 @@ export const standardGameExchangePhotoUrl = functions.region("asia-northeast1").
  * @param {T[]} array - The input array to be shuffled.
  * @return {T[]} A new array with shuffled elements.
  */
-  function shuffleArray<T>(array: T[]): T[] {
-    const copy = [...array];
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-  }
+  // function shuffleArray<T>(array: T[]): T[] {
+  //   const copy = [...array];
+  //   for (let i = copy.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [copy[i], copy[j]] = [copy[j], copy[i]];
+  //   }
+  //   return copy;
+  // }
 
   // もしroleがwerewolfであれば、他のwerewolfのphotoUrlをexchangePhotoUrlに保存する
   // roleがvillagerであれば自身のphotoUrlをexchangePhotoUrlに保存する
@@ -37,7 +37,9 @@ export const standardGameExchangePhotoUrl = functions.region("asia-northeast1").
  */
   function exchangeWerewolfPhotoUrls(users: GameUser): GameUser {
     const werewolves = users.filter((user) => user.role === "werewolf");
-    const shuffledWerewolves = shuffleArray(werewolves);
+    // const shuffledWerewolves = shuffleArray(werewolves);
+    // shuffleArrayをしても、ランダムで交換されない可能性があるので修正
+    const shuffledWerewolves = werewolves;
     const werewolfExchangeMap = new Map<string, string>();
 
     for (let i = 0; i < werewolves.length; i++) {
