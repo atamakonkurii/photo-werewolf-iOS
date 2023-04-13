@@ -9,7 +9,6 @@ struct ResultView: View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
 				.ignoresSafeArea()
-				.navigationBarBackButtonHidden(true)
 
 			VStack {
 				Text("結果発表")
@@ -17,7 +16,6 @@ struct ResultView: View {
 					.foregroundColor(.white)
 					.fontWeight(.black)
 					.padding(.bottom, 8)
-
 
 				ForEach(users) { user in
 					HStack {
