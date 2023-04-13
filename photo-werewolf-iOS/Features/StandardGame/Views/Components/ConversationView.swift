@@ -24,6 +24,9 @@ struct ConversationView: View {
 
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
+						Spacer()
+							.frame(width: 20)
+
 						ForEach(users) { user in
 							VStack {
 								if let exchangePhotoUrl = user.exchangePhotoUrl {
@@ -42,6 +45,8 @@ struct ConversationView: View {
 							}
 						}
 
+						Spacer()
+							.frame(width: 20)
 					}
 				}
 				.padding(.bottom, 32)

@@ -73,6 +73,11 @@ struct HomeView: View {
 										return
 									}
 
+									// gameRoomがwaitingでないと参加できない
+									guard gameRoom?.status == .waiting  else {
+										return
+									}
+
 									// 部屋にユーザーを追加
 									try await viewModel.postGameRoomUser(roomId: roomIdText)
 
