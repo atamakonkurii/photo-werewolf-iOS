@@ -30,6 +30,8 @@
 		D5688BF629DE2A910026A52F /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5688BF529DE2A910026A52F /* VoteView.swift */; };
 		D5688BF829DE37B40026A52F /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5688BF729DE37B40026A52F /* ConversationViewModel.swift */; };
 		D5688BFA29DE3A9E0026A52F /* VoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5688BF929DE3A9E0026A52F /* VoteViewModel.swift */; };
+		D57AAD5C29ECBBCE00E74115 /* RemoteConfigClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57AAD5B29ECBBCE00E74115 /* RemoteConfigClient.swift */; };
+		D57AAD5E29ECBC6300E74115 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D57AAD5D29ECBC6300E74115 /* FirebaseRemoteConfig */; };
 		D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */; };
 		D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */; };
 		D57B3D6029895EC5009E00A9 /* MakeRoomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */; };
@@ -72,6 +74,7 @@
 		D5688BF529DE2A910026A52F /* VoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 		D5688BF729DE37B40026A52F /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		D5688BF929DE3A9E0026A52F /* VoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewModel.swift; sourceTree = "<group>"; };
+		D57AAD5B29ECBBCE00E74115 /* RemoteConfigClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigClient.swift; sourceTree = "<group>"; };
 		D57B3D57298957BF009E00A9 /* FIrebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrebaseAuthClient.swift; sourceTree = "<group>"; };
 		D57B3D5D29895E64009E00A9 /* NameChangePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChangePopupView.swift; sourceTree = "<group>"; };
 		D57B3D5F29895EC5009E00A9 /* MakeRoomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomPopupView.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D57AAD5E29ECBC6300E74115 /* FirebaseRemoteConfig in Frameworks */,
 				D5AD9ACF29C286D600984A16 /* Kingfisher in Frameworks */,
 				D54B884629A7A4CC00D695A3 /* FirebaseFirestoreSwift in Frameworks */,
 				D50244A029476903005B3282 /* FirebaseCrashlytics in Frameworks */,
@@ -171,6 +175,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D57AAD5A29ECBB7700E74115 /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				D57AAD5B29ECBBCE00E74115 /* RemoteConfigClient.swift */,
+			);
+			path = RemoteConfig;
 			sourceTree = "<group>";
 		};
 		D57B3D4629895414009E00A9 /* Features */ = {
@@ -269,6 +281,7 @@
 		D57B3D56298956E3009E00A9 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				D57AAD5A29ECBB7700E74115 /* RemoteConfig */,
 				D524617429C3C68000454EE6 /* Firestorage */,
 				D5D4E5D1299EEE1600F9B1EE /* Firestore */,
 				D5D4E5D0299EED7F00F9B1EE /* FIrebaseAutentication */,
@@ -396,6 +409,7 @@
 				D5AD9ACE29C286D600984A16 /* Kingfisher */,
 				D548C15629C34E6900BFC84E /* FirebaseStorage */,
 				D53E115629D3AAD400863D0C /* FirebaseFunctions */,
+				D57AAD5D29ECBC6300E74115 /* FirebaseRemoteConfig */,
 			);
 			productName = "photo-werewolf-iOS";
 			productReference = D5914FF32922E8CE007E61D5 /* photo-werewolf-iOS.app */;
@@ -472,6 +486,7 @@
 				D5914FF72922E8CE007E61D5 /* PhotoWerewolfIosApp.swift in Sources */,
 				D57B3D5E29895E64009E00A9 /* NameChangePopupView.swift in Sources */,
 				D57B3D58298957BF009E00A9 /* FIrebaseAuthClient.swift in Sources */,
+				D57AAD5C29ECBBCE00E74115 /* RemoteConfigClient.swift in Sources */,
 				D5906E5329B69D5C000CED9F /* GameRoomEntity.swift in Sources */,
 				D5C6C65629D5004C0054A11E /* CheckRoleViewModel.swift in Sources */,
 				D5688BFA29DE3A9E0026A52F /* VoteViewModel.swift in Sources */,
@@ -754,6 +769,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		D57AAD5D29ECBC6300E74115 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D502449A29476903005B3282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 		D5AD9ACE29C286D600984A16 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
