@@ -65,6 +65,9 @@ struct HomeView: View {
 							onCommit: {
 								// 部屋が存在していた時だけ待機部屋に進む
 								Task {
+
+									// テスト
+									viewModel.isRequireUpdate()
 									// 部屋を取得
 									let gameRoom = try await viewModel.getGameRoom(roomId: roomIdText)
 

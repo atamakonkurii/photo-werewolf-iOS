@@ -22,6 +22,9 @@ final public class RemoteConfigClient {
 				guard error == nil else { return }
 				DispatchQueue.main.async {
 					print("sucess:\(changed)")
+					print("app_store_url\(String(describing: self.remoteConfig.configValue(forKey: "app_store_url").stringValue))")
+					print("current_version\(String(describing: self.remoteConfig.configValue(forKey: "current_version").stringValue))")
+					print("require_force_update\(String(describing: self.remoteConfig.configValue(forKey: "require_force_update").stringValue))")
 				}
 			}
 		}
