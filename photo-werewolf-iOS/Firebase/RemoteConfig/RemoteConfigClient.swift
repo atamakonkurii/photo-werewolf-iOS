@@ -8,6 +8,8 @@ final public class RemoteConfigClient {
 	private init() {}
 
 	func tempFetch() {
+		remoteConfig.configSettings = settings
+
 		remoteConfig.addOnConfigUpdateListener { configUpdate, error in
 			guard let configUpdate, error == nil else {
 				print("Error listening for config updates: \(String(describing: error))")
@@ -19,7 +21,7 @@ final public class RemoteConfigClient {
 			self.remoteConfig.activate { changed, error in
 				guard error == nil else { return }
 				DispatchQueue.main.async {
-					print("sucess")
+					print("sucess:\(changed)")
 				}
 			}
 		}

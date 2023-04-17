@@ -135,6 +135,9 @@ struct HomeView: View {
 		.onAppear {
 			// ログインしていない場合は匿名ログインをする
 			FirebaseAuthClient.shared.anonymousLogin()
+
+			// RemoteConfigの値を監視する
+			RemoteConfigClient.shared.tempFetch()
 		}
 	}
 }
