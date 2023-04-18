@@ -47,11 +47,11 @@ class HomeViewModel: ObservableObject {
 		let requireForceUpdate = remoteConfig.configValue(forKey: "require_force_update").boolValue
 
 		// 強制アップデートが不要な場合は早期リターン
-		guard requireForceUpdate == true else {
+		guard requireForceUpdate else {
 			return false
 		}
 
-		guard let requiredVersion = remoteConfig.configValue(forKey: "current_version").stringValue else {
+		guard let latestVersion = remoteConfig.configValue(forKey: "latest_version").stringValue else {
 			return false
 		}
 
@@ -59,12 +59,16 @@ class HomeViewModel: ObservableObject {
 			return false
 		}
 
-		if requiredVersion > currentVersion  {
-			print("requiredVersionの方が大きい")
-			return false
-		} else {
-			print("currentVersionの方が大きい")
+		/// ストアに公開されている最新バーションが今のアプリバージョンよりも新しい場合、強制アップデートをする
+		if latestVersion > currentVersion  {
+			/// appStoreUrlがnilの場合は強制アップデートをしない
+			guard (remoteConfig.configValue(forKey: "app_store_url").stringValue != nil) else {
+				return false
+			}
+
 			return true
+		} else {
+			return false
 		}
 	}
 }
