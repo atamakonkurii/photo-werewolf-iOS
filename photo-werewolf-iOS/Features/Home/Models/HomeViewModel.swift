@@ -40,4 +40,35 @@ class HomeViewModel: ObservableObject {
 	func postGameRoomUser(roomId: String) async throws {
 		try await model.postGameRoomUser(roomId: roomId)
 	}
+
+	func isRequireUpdate() -> Bool {
+		let remoteConfig = RemoteConfigClient.shared.remoteConfig
+
+		let requireForceUpdate = remoteConfig.configValue(forKey: "require_force_update").boolValue
+
+		// 強制アップデートが不要な場合は早期リターン
+		guard requireForceUpdate else {
+			return false
+		}
+
+		guard let latestVersion = remoteConfig.configValue(forKey: "latest_version").stringValue else {
+			return false
+		}
+
+		guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else {
+			return false
+		}
+
+		/// ストアに公開されている最新バーションが今のアプリバージョンよりも新しい場合、強制アップデートをする
+		if latestVersion > currentVersion  {
+			/// appStoreUrlがnilの場合は強制アップデートをしない
+			guard (remoteConfig.configValue(forKey: "app_store_url").stringValue != nil) else {
+				return false
+			}
+
+			return true
+		} else {
+			return false
+		}
+	}
 }

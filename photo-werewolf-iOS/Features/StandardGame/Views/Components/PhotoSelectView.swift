@@ -64,17 +64,19 @@ struct PhotoSelectView: View {
 					}
 				} label: {
 					ZStack {
-						Image(systemName: "photo")
-							.font(.system(size: 32, design: .rounded))
-							.foregroundColor(Color.white)
-							.frame(width: 180, height: 240)
-							.background(Color(UIColor.lightGray))
-
 						if let photoUrl = own?.photoUrl, let url = URL(string: photoUrl) {
 							KFImage(url)
 								.resizable()
-								.frame(width: 180, height: 240)
+								.scaledToFit()
+								.frame(width: UIScreen.main.bounds.size.width - 40,
+									   height: 320)
 						} else {
+							Image(systemName: "photo")
+								.font(.system(size: 32, design: .rounded))
+								.foregroundColor(Color.white)
+								.frame(width: 180, height: 240)
+								.background(Color(UIColor.lightGray))
+
 							if isLoading {
 								ProgressView()
 							}

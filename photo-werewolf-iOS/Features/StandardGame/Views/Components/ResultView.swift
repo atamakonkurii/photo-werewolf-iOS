@@ -4,11 +4,28 @@ import Kingfisher
 struct ResultView: View {
 	var gameRoom: GameRoom?
 	var users: [GameUser]
+	@Environment(\.dismiss) var dismiss
 
 	var body: some View {
 		ZStack {
 			Color(red: 0.133, green: 0.157, blue: 0.192)
 				.ignoresSafeArea()
+				.navigationBarBackButtonHidden(true)
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading) {
+						Button(
+							action: {
+								dismiss()
+							}, label: {
+								Text("ゲーム終了")
+									.font(.system(size: 16, design: .rounded))
+									.foregroundColor(.gray)
+									.fontWeight(.black)
+							}
+						)
+						.tint(.orange)
+					}
+				}
 
 			VStack {
 				Text("結果発表")

@@ -16,6 +16,7 @@ struct HomeView: View {
 	@State private var navigationPath: [NavigationPath] = []
 
 	@State private var roomIdText: String = ""
+	@State private var isAlert: Bool = false
 
 	var body: some View {
 		NavigationStack(path: $navigationPath) {
@@ -65,11 +66,22 @@ struct HomeView: View {
 							onCommit: {
 								// 部屋が存在していた時だけ待機部屋に進む
 								Task {
+
+									// 強制アップデートが必要な場合はダイアログを表示し早期リターン
+									guard !viewModel.isRequireUpdate() else {
+										isAlert = true
+										return
+									}
 									// 部屋を取得
 									let gameRoom = try await viewModel.getGameRoom(roomId: roomIdText)
 
 									// 存在判定
 									guard gameRoom != nil else {
+										return
+									}
+
+									// gameRoomがwaitingでないと参加できない
+									guard gameRoom?.status == .waiting  else {
 										return
 									}
 
@@ -93,6 +105,11 @@ struct HomeView: View {
 
 					Button(action: {
 						withAnimation {
+							// 強制アップデートが必要な場合はダイアログを表示し早期リターン
+							guard !viewModel.isRequireUpdate() else {
+								isAlert = true
+								return
+							}
 							viewModel.showingMakeRoomPopUp = true
 						}
 					}, label: {
@@ -108,6 +125,11 @@ struct HomeView: View {
 
 					Spacer()
 				}
+				.alert("アップデートが必要です", isPresented: $isAlert, actions: {
+					if let appStoreUrl = RemoteConfigClient.shared.remoteConfig.configValue(forKey: "app_store_url").stringValue {
+						Link("ストアを開く", destination: URL(string: appStoreUrl)!)
+					}
+				})
 
 				if viewModel.showingNameChangePopUp {
 					NameChangePopupView(isPresent: $viewModel.showingNameChangePopUp)
@@ -130,6 +152,9 @@ struct HomeView: View {
 		.onAppear {
 			// ログインしていない場合は匿名ログインをする
 			FirebaseAuthClient.shared.anonymousLogin()
+
+			// RemoteConfigの値を監視する
+			RemoteConfigClient.shared.subscription()
 		}
 	}
 }
