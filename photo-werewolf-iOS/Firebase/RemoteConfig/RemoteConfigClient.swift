@@ -7,7 +7,7 @@ final public class RemoteConfigClient {
 
 	private init() {}
 
-	func tempFetch() {
+	func subscription() {
 		remoteConfig.configSettings = settings
 
 		remoteConfig.addOnConfigUpdateListener { configUpdate, error in

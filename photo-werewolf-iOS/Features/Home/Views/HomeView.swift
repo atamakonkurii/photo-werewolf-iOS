@@ -105,6 +105,11 @@ struct HomeView: View {
 
 					Button(action: {
 						withAnimation {
+							// 強制アップデートが必要な場合はダイアログを表示し早期リターン
+							guard !viewModel.isRequireUpdate() else {
+								isAlert = true
+								return
+							}
 							viewModel.showingMakeRoomPopUp = true
 						}
 					}, label: {
@@ -149,7 +154,7 @@ struct HomeView: View {
 			FirebaseAuthClient.shared.anonymousLogin()
 
 			// RemoteConfigの値を監視する
-			RemoteConfigClient.shared.tempFetch()
+			RemoteConfigClient.shared.subscription()
 		}
 	}
 }
