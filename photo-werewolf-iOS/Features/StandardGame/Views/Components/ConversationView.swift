@@ -89,8 +89,7 @@ struct ConversationView_Previews: PreviewProvider {
 	static private var gameRoom: GameRoom = GameRoom(owner: GameUser(userId: "testUserId01", name: "テストNAME01"),
 													 roomName: "テストルーム",
 													 status: .conversation,
-													 gameType: .standard,
-													 createdAt: nil)
+													 gameType: .standard)
 
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01",exchangePhotoUrl: "https://placehold.jp/80x80.png"),
 											GameUser(userId: "testUserId02", name: "テストNAME02",exchangePhotoUrl: "https://placehold.jp/100x100.png"),

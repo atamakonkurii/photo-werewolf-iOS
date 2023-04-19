@@ -56,8 +56,7 @@ extension FirestoreApiClient {
 		let gameRoom = GameRoom(owner: gameUser,
 								roomName: roomName,
 								status: StandardGameRoomStatus.waiting,
-								gameType: gameType,
-								createdAt: Timestamp())
+								gameType: gameType)
 		do {
 			try docRef.setData(from: gameRoom)
 			try await postGameRoomUser(roomId: roomId)

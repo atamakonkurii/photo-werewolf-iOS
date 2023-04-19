@@ -215,8 +215,7 @@ struct WaitingRoomView_Previews: PreviewProvider {
 	static private var gameRoom: GameRoom = GameRoom(owner: GameUser(userId: "testUserId01", name: "テストNAME01"),
 													 roomName: "テストルーム",
 													 status: .waiting,
-													 gameType: .standard,
-													 createdAt: nil)
+													 gameType: .standard)
 	static private var users: [GameUser] = [GameUser(userId: "testUserId01", name: "テストNAME01"),
 											GameUser(userId: "testUserId02", name: "テストNAME02"),
 											GameUser(userId: "testUserId03", name: "テストNAME03"),
