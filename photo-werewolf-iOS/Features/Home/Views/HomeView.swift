@@ -52,7 +52,7 @@ struct HomeView: View {
 						.foregroundColor(.white)
 						.fontWeight(.black)
 
-					Image("character_hitsuji_ookami")
+					Image("photo_werewolf_icon")
 						.resizable()
 						.scaledToFit()
 						.frame(width: 300, height: 150)
@@ -126,7 +126,7 @@ struct HomeView: View {
 					Spacer()
 				}
 				.alert("アップデートが必要です", isPresented: $isAlert, actions: {
-					if let appStoreUrl = RemoteConfigClient.shared.remoteConfig.configValue(forKey: "app_store_url").stringValue {
+					if let appStoreUrl = RemoteConfigClient.shared.remoteConfig.configValue(forKey: "app_store_url").stringValue, (URL(string: appStoreUrl) != nil) {
 						Link("ストアを開く", destination: URL(string: appStoreUrl)!)
 					}
 				})
