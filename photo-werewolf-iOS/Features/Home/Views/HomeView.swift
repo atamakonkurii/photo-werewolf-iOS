@@ -72,6 +72,12 @@ struct HomeView: View {
 										isAlert = true
 										return
 									}
+
+									// 空文字の場合早期リターン
+									guard !roomIdText.isEmpty else {
+										return
+									}
+
 									// 部屋を取得
 									let gameRoom = try await viewModel.getGameRoom(roomId: roomIdText)
 
@@ -88,7 +94,11 @@ struct HomeView: View {
 									// 部屋にユーザーを追加
 									try await viewModel.postGameRoomUser(roomId: roomIdText)
 
+									// ゲーム画面に遷移
 									navigationPath.append(.standardGame(roomId: roomIdText))
+
+									// roomIdTextのリセット
+									roomIdText = ""
 								}
 							}
 						)
