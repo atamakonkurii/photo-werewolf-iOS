@@ -73,7 +73,6 @@ struct HomeView: View {
 										return
 									}
 
-
 									// 空文字の場合早期リターン
 									guard !roomIdText.isEmpty else {
 										return
@@ -94,7 +93,6 @@ struct HomeView: View {
 
 									// 部屋にユーザーを追加
 									try await viewModel.postGameRoomUser(roomId: roomIdText)
-
 
 									// ゲーム画面に遷移
 									navigationPath.append(.standardGame(roomId: roomIdText))
