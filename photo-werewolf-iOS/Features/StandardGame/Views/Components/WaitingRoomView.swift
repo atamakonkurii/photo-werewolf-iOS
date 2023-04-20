@@ -71,15 +71,15 @@ struct WaitingRoomView: View {
 								.foregroundColor(.white)
 								.fontWeight(.black)
 
-							Button(
-								action: {
-									sharePost(shareText: "iOS-Docs", shareUrl: "https://ios-docs.dev")
-								}, label: {
-									Image(systemName: "square.and.arrow.up.fill")
-										.font(.system(size: 30))
-										.foregroundColor(.gray)
-								}
-							)
+//							Button(
+//								action: {
+//									sharePost(shareText: "iOS-Docs", shareUrl: "https://ios-docs.dev")
+//								}, label: {
+//									Image(systemName: "square.and.arrow.up.fill")
+//										.font(.system(size: 30))
+//										.foregroundColor(.gray)
+//								}
+//							)
 						}
 
 						Button(action: {
