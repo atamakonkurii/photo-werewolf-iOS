@@ -19,16 +19,18 @@ final public class FirebaseAuthClient: ObservableObject {
 		// 未ログインの場合、必ず匿名ログインをする
 		if Auth.auth().currentUser == nil {
 			Auth.auth().signInAnonymously { _, error in
-				if error != nil { return }
+				self.setFirestoreUser()
+				if error != nil { print("error:\(String(describing: error))") }
 			}
+		} else {
+			setFirestoreUser()
 		}
-
-		setFirestoreUser()
 	}
 
 	func setFirestoreUser() {
 		// 現在ログイン中のユーザーデータがfirestoreにあるか確認、なければ作成
 		guard let user = Auth.auth().currentUser else {
+			print("currentUserが存在しません")
 			return
 		}
 		let docRef = FirestoreApiClient.shared.db.collection("users").document(user.uid)
